@@ -1,5 +1,16 @@
 import { NavLink } from "react-router-dom";
 
+import LoginHeaderButton from "../buttons/LoginHeaderButton";
+import SignUpHeaderButton from "../buttons/SignUpHeaderButton";
+
+const handleLogin = () => {
+    console.log('clicked');
+}
+
+const handleSignUp = () => {
+    console.log('clicked');
+}
+
 const LandingPageHeader = () => {
     return (
         <>
@@ -22,7 +33,13 @@ const LandingPageHeader = () => {
                     </nav>
 
                     <div className="flex gap-3">
-                        
+                        <LoginHeaderButton 
+                            onClick={handleLogin}
+                        />
+
+                        <SignUpHeaderButton 
+                            onClick={handleSignUp}
+                        />
                     </div>
                 </div>
             </header>
