@@ -6,10 +6,10 @@ const SignUpHeaderButton = ({ onClick }: ButtonProps) => {
     return (
         <>
             <button
-                className="text-black hover:text-gray-400 cursor-pointer focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
+                className="text-white text-sm bg-teal-700 hover:bg-teal-800 rounded-lg cursor-pointer px-3 p-2 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:ring-offset-2"
                 onClick={onClick}
             >
-                Sign Up
+                Register
             </button>
         </>
     )
