@@ -30,6 +30,7 @@ const LoginModal = ({ isOpen, onClose }: ModalProps ) => {
         <>
             <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center px-4">
                 <div 
+                    ref={modalRef}
                     className="w-full max-w-md rounded-lg shadow-lg bg-white p-6"
                 >
                     <div className="mb-6 flex flex-col items-center text-center">
