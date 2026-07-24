@@ -3,15 +3,12 @@ import { NavLink } from "react-router-dom";
 import LoginHeaderButton from "../buttons/LoginHeaderButton";
 import SignUpHeaderButton from "../buttons/SignUpHeaderButton";
 
-const handleLogin = () => {
-    console.log('clicked');
+type ModalProps = {
+    onLogin: () => void;
+    onRegister: () => void;
 }
 
-const handleSignUp = () => {
-    console.log('clicked');
-}
-
-const LandingPageHeader = () => {
+const LandingPageHeader = ({ onLogin, onRegister }: ModalProps ) => {
     return (
         <>
             <header className="sticky top-0 z-40 w-full border-b border-gray-200 bg-slate-50 backdrop-blur">
@@ -34,11 +31,11 @@ const LandingPageHeader = () => {
 
                     <div className="flex gap-3">
                         <LoginHeaderButton 
-                            onClick={handleLogin}
+                            onClick={onLogin}
                         />
 
                         <SignUpHeaderButton 
-                            onClick={handleSignUp}
+                            onClick={onRegister}
                         />
                     </div>
                 </div>
