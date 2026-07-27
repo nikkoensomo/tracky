@@ -6,9 +6,9 @@ interface Category extends Document {
     userId: Types.ObjectId;
     name: string,
     type: CategoryType,
-    color: string,
+    color?: string,
     icon?: string,
-    isDefault: boolean, 
+    isDefault?: boolean, 
 }
 
 const categorySchema = new Schema<Category>({
@@ -29,7 +29,7 @@ const categorySchema = new Schema<Category>({
     },
     color: {
         type: String,
-        required: true,
+        required: false,
         default: '#64748B',
     },
     icon: {

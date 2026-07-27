@@ -5,11 +5,11 @@ import type { IUser } from '../models/User.js';
 import type { Request, Response } from 'express';
 import type { HydratedDocument } from 'mongoose';
 
-type AuthResponse = Request & {
+type AuthRequest = Request & {
     user?: HydratedDocument<IUser> | null;
 };
 
-export const createExpense = async (req: AuthResponse, res: Response) => {
+export const createExpense = async (req: AuthRequest, res: Response) => {
     try {
         const { accountId, categoryId, amount, title, note, transactionDate, paymentMethod } = req.body;
 
