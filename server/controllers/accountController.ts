@@ -47,3 +47,29 @@ export const createAccount = async (req: AuthRequest, res: Response) => {
         });
     }
 }
+
+export const getAccountDetails = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.user) {
+            return res.status(400).json({ message: 'Not authorized. code: 001' });
+        }
+
+        if (req.params.id !== req.user.id) {
+            return res.status(400).json({ message: 'Not authorized. code: 002' });
+        }
+
+        const accountDetails = await Account.find({
+            userId: req.user._id,
+        });
+
+        res.status(200).json({
+            message: 'Account details:',
+            accountDetails,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server error.',
+            error: error instanceof Error ? error.message : 'Unknown error'
+        });
+    }
+}
