@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
-interface User extends Document {
+export interface IUser extends Document {
     username: string;
     firstName: string;
     lastName: string;
@@ -10,7 +10,7 @@ interface User extends Document {
     updatedAt?: Date;
 }
 
-const userSchema = new Schema<User>({
+const userSchema = new Schema<IUser>({
     username: {
         type: String,
         required: true,
@@ -41,6 +41,6 @@ const userSchema = new Schema<User>({
     }
 }, { timestamps: true })
 
-const User: Model<User> = mongoose.model<User>('User', userSchema);
+const User: Model<IUser> = mongoose.model<IUser>('User', userSchema);
 
 export default User;
