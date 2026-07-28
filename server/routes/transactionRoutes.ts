@@ -1,11 +1,13 @@
 import express from 'express';
 import { 
-    createExpense 
+    createExpense,
+    createIncome
 } from '../controllers/transactionController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', protect, createExpense);
+router.post('/expense', protect, createExpense);
+router.post('/income', protect, createIncome);
 
 export default router;
