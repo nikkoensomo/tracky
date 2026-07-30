@@ -1,4 +1,3 @@
-import { Cat } from "lucide-react";
 import CTAButtonOne from "../../buttons/CTAButtonOne";
 import CTAButtonTwo from "../../buttons/CTAButtonTwo";
 
