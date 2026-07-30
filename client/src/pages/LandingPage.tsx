@@ -3,6 +3,7 @@ import { useState } from 'react';
 import LandingPageHeader from "../components/headers/LandingPageHeader";
 import LoginModal from "../components/modals/LoginModal";
 import RegisterModal from "../components/modals/RegisterModal";
+import LandingPageHero from '../components/sections/heros/LandingPageHero';
 
 const LandingPage = () => {
     type ModalMode = 'login' | 'register' | null;
@@ -29,6 +30,7 @@ const LandingPage = () => {
             />
 
             <main>
+                <LandingPageHero />
                 
             </main>
 
