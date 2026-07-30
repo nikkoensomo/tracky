@@ -1,24 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signupService } from '../../services/authService';
-import type { RegisterFormData } from '../../types/auth.types';
+import type { RegisterFormData, RegisterFormError } from '../../types/auth.types';
 import SubmitFormButton from '../buttons/SubmitFormButton';
 
 type RegisterFormProps = {
     onSuccess: () => void;
 }
 
-type FormError = {
-    username?: string;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-    general?: string;
-}
-
 const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState<RegisterFormData>({
         username: '',
@@ -29,7 +21,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         confirmPassword: '',
     });
 
-    const [formErrors, setFormErrors] = useState<FormError>({
+    const [formErrors, setFormErrors] = useState<RegisterFormError>({
         username: '',
         firstName: '',
         lastName: '',
@@ -47,7 +39,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     }
 
     const validate = () => {
-        const newErrors: FormError = {};
+        const newErrors: RegisterFormError = {};
 
         if (!formData.username.trim()) {
             newErrors.username = "Username is required."
@@ -83,7 +75,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     }
 
     const handleSubmit = async () => {
-        const newErrors: FormError = validate();
+        const newErrors: RegisterFormError = validate();
 
         if (Object.keys(newErrors).length > 0) {
             setFormErrors(newErrors);
@@ -99,7 +91,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             localStorage.setItem('token', data.token);
 
             onSuccess();
-
+            navigate('/');
         } catch (error) {
             setFormErrors({
                 ...formErrors,

@@ -8,3 +8,25 @@ export type RegisterFormData = {
 };
 
 export type RegisterPayload = Omit<RegisterFormData, 'confirmPassword'>;
+
+export type LoginFormData = {
+    email: string;
+    password: string;
+}
+
+export type RegisterFormError = {
+    username?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+    general?: string;
+}
+
+export type LoginFormError = {
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+    general?: string;
+}

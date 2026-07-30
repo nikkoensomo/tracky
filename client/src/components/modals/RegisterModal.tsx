@@ -34,7 +34,7 @@ const LoginModal = ({ isOpen, onClose }: ModalProps) => {
                     ref={modalRef}
                     className="w-full max-w-md rounded-lg shadow-lg bg-white p-6"
                 >
-                    <div className="mb-6 flex flex-col items-center text-center">
+                    <div className="flex flex-col items-center text-center">
                         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
                             TR
                         </div>
@@ -48,13 +48,12 @@ const LoginModal = ({ isOpen, onClose }: ModalProps) => {
                             <br />
                             Take control today.
                         </p>
+                    </div>
 
-                        <div className="w-full">
-                            <RegisterForm
-                                onSuccess={onClose}
-                            />
-                        </div>
-
+                    <div className="w-full">
+                        <RegisterForm
+                            onSuccess={onClose}
+                        />
                     </div>
                 </div>
             </div>
