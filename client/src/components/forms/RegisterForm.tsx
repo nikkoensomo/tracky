@@ -53,6 +53,14 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             newErrors.username = "Username is required."
         }
 
+        if (!formData.firstName.trim()) {
+            newErrors.firstName = "First name is required."
+        }
+
+        if (!formData.lastName.trim()) {
+            newErrors.lastName = "Last name is required."
+        }
+
         if (!formData.email.trim()) {
             newErrors.email = "Email is required."
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -93,7 +101,10 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             onSuccess();
 
         } catch (error) {
-
+            setFormErrors({
+                ...formErrors,
+                general: error instanceof Error ? error.message : 'Something went wrong' 
+            });
         } finally {
             setIsLoading(false);
         }
@@ -109,6 +120,26 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                     value={formData.username}
                     onChange={handleChange}
                     placeholder="Username"
+                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                />
+                {formErrors.username && <p className="text-red-500 text-xs">{formErrors.username}</p>}
+
+                <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="First Name"
+                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                />
+                {formErrors.username && <p className="text-red-500 text-xs">{formErrors.username}</p>}
+
+                <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Last Name"
                     className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
                 />
                 {formErrors.username && <p className="text-red-500 text-xs">{formErrors.username}</p>}
