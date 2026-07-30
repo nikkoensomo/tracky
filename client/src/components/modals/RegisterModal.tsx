@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import LoginForm from '../forms/LoginForm';
+import RegisterForm from '../forms/RegisterForm';
 
 type ModalProps = {
     isOpen: boolean;
@@ -34,23 +34,24 @@ const LoginModal = ({ isOpen, onClose }: ModalProps) => {
                     ref={modalRef}
                     className="w-full max-w-md rounded-lg shadow-lg bg-white p-6"
                 >
-                    <div className="mb-6 flex flex-col items-center text-center">
+                    <div className="flex flex-col items-center text-center">
                         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
                             TR
                         </div>
 
                         <h2 className="text-2xl font-semibold text-zinc-950">
-                            Welcome back!
+                            Create your Tracky account!
                         </h2>
 
-                        <p className="mt-2 max-w-sm text-sm leading-6 text-gray-500">
-                            Track your spending. Grow your savings. Stay in control.
+                        <p className="mt-2 max-w-sm text-sm leading-6 text-gray-500 mb-4">
+                            Start tracking smarter. Build better habits.
+                            <br />
+                            Take control today.
                         </p>
                     </div>
 
-
                     <div className="w-full">
-                        <LoginForm 
+                        <RegisterForm
                             onSuccess={onClose}
                         />
                     </div>
