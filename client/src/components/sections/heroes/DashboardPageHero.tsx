@@ -1,3 +1,4 @@
+import { ArrowDownUp } from 'lucide-react';
 import AddAccountButton from "../../buttons/AddAccountButton";
 import AddTransactionButton from "../../buttons/AddTransactionButton";
 import SetBudgetButton from "../../buttons/SetBudgetButton";
@@ -24,6 +25,15 @@ const DashboardPageHero = () => {
                         <SetBudgetButton 
                             onClick={() => {}}
                         />
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-[2fr_1fr] gap-4">
+                    <div className="bg-whtie border border-gray-200 rounded-lg p-6">
+                        <div className="flex gap-2 items-center">
+                            <ArrowDownUp size={20}/>
+                            <span className="text-slate-800 text-sm">Recent Transactions</span>
+                        </div>
                     </div>
                 </div>
             </section>
