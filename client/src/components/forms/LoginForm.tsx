@@ -61,7 +61,10 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
             setIsLoading(true);
 
             const data = await loginService(formData);
-            console.log(data);
+            console.log({
+                message: 'Login success.',
+                data
+            });
 
             localStorage.setItem('token', data.token);
 
