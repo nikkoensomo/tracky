@@ -124,3 +124,28 @@ export const createIncome = async (req: AuthRequest, res: Response) => {
         });
     }
 }
+
+export const getUserTransactions = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.user) {
+            return res.status(400).json({ message: 'Not Authorized.' });
+        }
+
+        const transactions = await Transaction.find({
+            userId: req.user._id,
+        }).populate([
+            {path: 'accountId', select: ['name', 'type']},
+            {path: 'categoryId', select: ['name', 'type']}
+        ]);
+
+        res.status(200).json({
+            message: 'User transactions:',
+            transactions,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server error',
+            error: error instanceof Error ? error.message : 'Unknown error.'
+        });
+    }
+}
