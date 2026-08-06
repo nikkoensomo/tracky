@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import {
-    Gauge
+    Gauge,
+    ArrowBigLeftDash
 } from 'lucide-react';
+import SidebarArrowButton from '../buttons/SidebarArrowButton';
 
 type SidebarProps = {
     onClose: () => void;
@@ -40,7 +42,9 @@ const Sidebar = () => {
                     </span>
 
                     <div className="ml-auto">
-                        <span>arrow here</span>
+                        <SidebarArrowButton 
+                            onClick={() => {}}
+                        />
                     </div>
                 </div>
             </aside>
