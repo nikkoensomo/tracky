@@ -1,4 +1,6 @@
-import SearchBar from "../../search/Searchbar";
+import AddAccountButton from "../../buttons/AddAccountButton";
+import AddTransactionButton from "../../buttons/AddTransactionButton";
+import SetBudgetButton from "../../buttons/SetBudgetButton";
 
 const DashboardPageHero = () => {
     return (
@@ -10,7 +12,19 @@ const DashboardPageHero = () => {
                         <span className="text-3xl text-white">320,032.03</span>
                     </div>
 
+                    <div className="flex justify-center items-center space-x-6 p-4">
+                        <AddTransactionButton 
+                            onClick={() => {}}
+                        />
 
+                        <AddAccountButton 
+                            onClick={() => {}}
+                        />
+
+                        <SetBudgetButton 
+                            onClick={() => {}}
+                        />
+                    </div>
                 </div>
             </section>
         </>
