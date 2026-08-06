@@ -16,8 +16,8 @@ const SidebarNavItem = ({ label, icon: Icon, to, end = false }: SidebarNavItemPr
                 end={end}
                 className={({ isActive }) =>
                     `flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors duration-200 ${isActive
-                        ? 'bg-white text-teal-800 shadow-sm hover:bg-gray-200 border border-gray-100'
-                        : 'text-slate-600 hover:bg-gray-300 hover:text-zinc-950'
+                        ? 'bg-white text-teal-800 shadow-sm hover:bg-gray-100 border transition-200 border-gray-100'
+                        : 'text-slate-600 hover:bg-gray-200 transition-200 hover:text-zinc-950'
                     }`
                 }
             >
