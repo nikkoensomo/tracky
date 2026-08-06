@@ -3,9 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import {
     Gauge,
-    ArrowBigLeftDash
+    ArrowBigLeftDash,
+    ArrowRightLeft,
+    ChartBarDecreasing,
+    ShelvingUnit,
+
 } from 'lucide-react';
 import SidebarArrowButton from '../buttons/SidebarArrowButton';
+import SidebarNavItem from './SidebarNavItem';
 
 type SidebarProps = {
     onClose: () => void;
@@ -18,12 +23,12 @@ type NavItemData = {
     end?: boolean;
 }
 
-// const navItems: NavItemData = [
-//     { label: 'Dashboard', icon: Gauge, to: '/', end: true },
-//     { label: 'Accounts', icon: Gauge, to: '/' },
-//     { label: 'Transactions', icon: Gauge, to: '/' },
-//     { label: 'Settings', icon: Gauge, to: '/' },
-// ];
+const navItems: NavItemData[] = [
+    { label: 'Dashboard', icon: Gauge, to: '/dashboard-page', end: true },
+    { label: 'Accounts', icon: ArrowRightLeft, to: '/' },
+    { label: 'Transactions', icon: ChartBarDecreasing, to: '/' },
+    { label: 'Categories', icon: ShelvingUnit, to: '/' },
+];
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -46,6 +51,26 @@ const Sidebar = () => {
                             onClick={() => {}}
                         />
                     </div>
+                </div>
+
+                <div className="w-full h-px bg-slate-300 mt-4"/>
+
+                <div className="flex flex-col mt-4 justify-center">
+                    <span className="text-gray-400 text-sm font-medium px-3">General</span>
+
+                    <nav className="flex flex-1 flex-col justify-between mt-2">
+                        <div className="flex flex-col gap-1">
+                            {navItems.map((item) => (
+                                <SidebarNavItem 
+                                    key={item.label}
+                                    label={item.label}
+                                    icon={item.icon}
+                                    to={item.to}
+                                    end={item.end}
+                                />
+                            ))}
+                        </div>
+                    </nav>
                 </div>
             </aside>
         </>
