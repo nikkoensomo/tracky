@@ -3,7 +3,11 @@ import AddAccountButton from "../../buttons/AddAccountButton";
 import AddTransactionButton from "../../buttons/AddTransactionButton";
 import SetBudgetButton from "../../buttons/SetBudgetButton";
 
-const DashboardPageHero = () => {
+type DashboardPageHeroProps = {
+    onCreateAccount: () => void;
+}
+
+const DashboardPageHero = ({ onCreateAccount }: DashboardPageHeroProps ) => {
     return (
         <>
             <section className="flex flex-col gap-4">
@@ -19,7 +23,7 @@ const DashboardPageHero = () => {
                         />
 
                         <AddAccountButton 
-                            onClick={() => {}}
+                            onClick={onCreateAccount}
                         />
 
                         <SetBudgetButton 
