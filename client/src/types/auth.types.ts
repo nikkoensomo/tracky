@@ -14,6 +14,8 @@ export type LoginFormData = {
     password: string;
 }
 
+
+// ERRORS
 export type RegisterFormError = {
     username?: string;
     firstName?: string;

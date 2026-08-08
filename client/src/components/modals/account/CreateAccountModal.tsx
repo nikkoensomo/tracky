@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+import CreateAccountForm from '../../forms/CreateAccountForm';
+
 type CreateAccountModalProps = {
     isOpen: boolean;
     onClose: () => void;
@@ -32,8 +34,13 @@ const CreateAccountModal = ({ isOpen, onClose }: CreateAccountModalProps) => {
                 <div 
                     ref={modalRef}
                     className="w-full bg-white max-w-md rounded-lg p-6">
-                    <div className="flex flex-col gap-4 items-center">
-                        <span>Please create an account.</span>
+                    <div className="flex flex-col gap-2 items-center text-center px-4">
+                        <span className="text-lg text-slate-700 font-medium">Add Account</span>
+                        <span className="text-[13px] text-slate-500">Create a place to track your money, like cash, bank accounts, or e-wallets.</span>
+                    </div>
+
+                    <div className="w-full px-4">
+                        <CreateAccountForm />
                     </div>
                 </div>
             </div>
