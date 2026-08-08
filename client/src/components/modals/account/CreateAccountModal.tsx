@@ -40,7 +40,10 @@ const CreateAccountModal = ({ isOpen, onClose }: CreateAccountModalProps) => {
                     </div>
 
                     <div className="w-full px-4">
-                        <CreateAccountForm />
+                        <CreateAccountForm 
+                            onClose={onClose}
+                            onSuccess={onClose}
+                        />
                     </div>
                 </div>
             </div>

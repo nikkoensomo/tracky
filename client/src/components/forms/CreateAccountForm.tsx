@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import type { AccountFormData, AccountFormErrors } from "../../types/account.types";
+import { createAccountService } from '../../services/transactionService';
 
 import CreateButton from '../buttons/reusable/SubmitButton';
 import CancelButton from '../buttons/reusable/CancelButton';
 
-const CreateAccountForm = () => {
+type CreateAccountFormProps = {
+    onClose: () => void;
+    onSuccess: () => void;
+}
+
+const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
 
     const [formData, setFormData] = useState<AccountFormData>({
         name: '',
@@ -54,6 +60,14 @@ const CreateAccountForm = () => {
 
         try {
             setIsLoading(true);
+
+            const payload = await createAccountService(formData);
+
+            onSuccess();
+            console.log({
+                message: 'Account creation success',
+                payload
+            })
         } catch (error) {
             setErrors({
                 ...errors,
@@ -122,10 +136,10 @@ const CreateAccountForm = () => {
 
                 <div className="flex justify-end space-between gap-4 mt-4">
                     <CancelButton
-                        onClick={() => { }}
+                        onClick={onClose}
                     />
                     <CreateButton
-                        onClick={() => { }}
+                        onClick={handleSubmit}
                     />
                 </div>
             </div>
