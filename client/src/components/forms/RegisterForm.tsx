@@ -91,7 +91,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
             localStorage.setItem('token', data.token);
 
             onSuccess();
-            navigate('/');
+            navigate('/dashboard-page');
         } catch (error) {
             setFormErrors({
                 ...formErrors,

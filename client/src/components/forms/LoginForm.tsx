@@ -69,7 +69,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
             localStorage.setItem('token', data.token);
 
             onSuccess();
-            navigate('/');
+            navigate('/dashboard-page');
         } catch (error) {
             setErrors({
                 ...errors,
