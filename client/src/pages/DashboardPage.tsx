@@ -8,8 +8,9 @@ import DashboardPageHero from "../components/sections/heroes/DashboardPageHero";
 import RecentTransactionsTable from '../components/tables/RecentTransactionsTable';
 
 import CreateAccountModal from '../components/modals/account/CreateAccountModal';
+import CreateCategoryModal from '../components/modals/category/CreateCategoryModal';
 
-type ModalMode = 'account' | 'expense' | null;
+type ModalMode = 'account' | 'expense' | 'category' | null;
 
 const DashboardPage = () => {
 
@@ -23,6 +24,10 @@ const DashboardPage = () => {
 
     const handleCreateExpense = () => {
         setModalMode('expense');
+    }
+
+    const handleCreateCategory = () => {
+        setModalMode('category');
     }
 
     const handleCloseModal = () => {
@@ -48,6 +53,7 @@ const DashboardPage = () => {
             <main className="flex flex-col gap-4">
                 <DashboardPageHero
                     onCreateAccount={handleCreateAccount}
+                    onCreateCategory={handleCreateCategory}
                 />
 
                 <div className="grid grid-cols-[2fr_1fr] gap-4">
@@ -66,6 +72,11 @@ const DashboardPage = () => {
 
             <CreateAccountModal
                 isOpen={modalMode === 'account'}
+                onClose={handleCloseModal}
+            />
+
+            <CreateCategoryModal 
+                isOpen={modalMode === 'category'}
                 onClose={handleCloseModal}
             />
         </>
