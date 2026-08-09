@@ -10,7 +10,7 @@ import RecentTransactionsTable from '../components/tables/RecentTransactionsTabl
 import CreateAccountModal from '../components/modals/account/CreateAccountModal';
 import CreateCategoryModal from '../components/modals/category/CreateCategoryModal';
 
-type ModalMode = 'account' | 'expense' | 'category' | null;
+type ModalMode = 'account' | 'transaction' | 'category' | null;
 
 const DashboardPage = () => {
 
@@ -22,8 +22,8 @@ const DashboardPage = () => {
         setModalMode('account');
     }
 
-    const handleCreateExpense = () => {
-        setModalMode('expense');
+    const handleCreateTransaction = () => {
+        setModalMode('transaction');
     }
 
     const handleCreateCategory = () => {
@@ -62,7 +62,7 @@ const DashboardPage = () => {
                             <ArrowDownUp size={20} />
                             <span className="text-slate-800 text-sm">Recent Transactions</span>
                         </div>
-
+                        
                         <RecentTransactionsTable
                             transactions={transactions}
                         />

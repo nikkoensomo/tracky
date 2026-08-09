@@ -8,5 +8,5 @@ export const createAccountService = async (formData: AccountFormData) => {
 
 export const getRecentTransactionsService = async () => {
     const response = await api.get('/transactions/');
-    return response.data;
+    return response.data.transactions;
 }
