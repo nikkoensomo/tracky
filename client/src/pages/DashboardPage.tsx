@@ -9,6 +9,7 @@ import RecentTransactionsTable from '../components/tables/RecentTransactionsTabl
 
 import CreateAccountModal from '../components/modals/account/CreateAccountModal';
 import CreateCategoryModal from '../components/modals/category/CreateCategoryModal';
+import CreateTransactionModal from '../components/modals/transaction/CreateTransactionModal';
 
 type ModalMode = 'account' | 'transaction' | 'category' | null;
 
@@ -54,15 +55,16 @@ const DashboardPage = () => {
                 <DashboardPageHero
                     onCreateAccount={handleCreateAccount}
                     onCreateCategory={handleCreateCategory}
+                    onCraeteTransaction={handleCreateTransaction}
                 />
 
                 <div className="grid grid-cols-[2fr_1fr] gap-4">
-                    <div className="flex flex-col gap-4 bg-whtie border border-gray-200 rounded-lg p-6">
+                    <div className="flex flex-col gap-4 bg-white border border-gray-200 rounded-lg p-6">
                         <div className="flex gap-2 items-center">
                             <ArrowDownUp size={20} />
                             <span className="text-slate-800 text-sm">Recent Transactions</span>
                         </div>
-                        
+
                         <RecentTransactionsTable
                             transactions={transactions}
                         />
@@ -77,6 +79,11 @@ const DashboardPage = () => {
 
             <CreateCategoryModal 
                 isOpen={modalMode === 'category'}
+                onClose={handleCloseModal}
+            />
+
+            <CreateTransactionModal 
+                isOpen={modalMode === 'transaction'}
                 onClose={handleCloseModal}
             />
         </>

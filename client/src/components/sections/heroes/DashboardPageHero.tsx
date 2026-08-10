@@ -6,9 +6,10 @@ import SetBudgetButton from "../../buttons/SetBudgetButton";
 type DashboardPageHeroProps = {
     onCreateAccount: () => void;
     onCreateCategory: () => void;
+    onCraeteTransaction: () => void;
 }
 
-const DashboardPageHero = ({ onCreateAccount, onCreateCategory }: DashboardPageHeroProps ) => {
+const DashboardPageHero = ({ onCreateAccount, onCreateCategory, onCraeteTransaction }: DashboardPageHeroProps ) => {
     return (
         <>
             <section className="flex flex-col gap-4">
@@ -20,7 +21,7 @@ const DashboardPageHero = ({ onCreateAccount, onCreateCategory }: DashboardPageH
 
                     <div className="flex justify-center items-center space-x-4 p-4">
                         <AddTransactionButton 
-                            onClick={() => {}}
+                            onClick={onCraeteTransaction}
                         />
 
                         <AddAccountButton 

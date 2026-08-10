@@ -18,3 +18,24 @@ export type Transaction = {
     createdAt: string;
     updatedAt: string;
 }
+
+export type TransactionFormData = {
+    accountId: string;
+    categoryId: string;
+    title: string;
+    amount: number;
+    note?: string;
+    transactionDate: string;
+    paymentMethod: 'cash' | 'ewallet' | 'credit_card';
+}
+
+export type TransactionFormErrors = {
+    accountId?: string;
+    categoryId?: string;
+    title?: string;
+    amount?: string;
+    note?: string;
+    transactionDate?: string;
+    paymentMethod?: string;
+    general?: string;
+}
