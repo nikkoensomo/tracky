@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+import CreateTransactionForm from '../../forms/CreateTransactionForm';
+
 type CreateTransactionModalProps = {
     isOpen: boolean;
     onClose: () => void;
@@ -35,6 +37,9 @@ const CreateTransactionModal = ({ isOpen, onClose }: CreateTransactionModalProps
                     <div className="flex flex-col gap-4 justify-center text-center">
                         <span className="text-lg font-medium text-slate-700">Create Transaction</span>
 
+                        <CreateTransactionForm 
+                                
+                        />
                     </div>
                 </div>
             </div>

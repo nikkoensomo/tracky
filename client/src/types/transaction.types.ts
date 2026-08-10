@@ -22,6 +22,7 @@ export type Transaction = {
 export type TransactionFormData = {
     accountId: string;
     categoryId: string;
+    type: 'income' | 'expense' | 'transfer';
     title: string;
     amount: number;
     note?: string;
@@ -32,6 +33,7 @@ export type TransactionFormData = {
 export type TransactionFormErrors = {
     accountId?: string;
     categoryId?: string;
+    type?: string;
     title?: string;
     amount?: string;
     note?: string;
