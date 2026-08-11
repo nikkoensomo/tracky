@@ -55,6 +55,10 @@ const transactionSchema = new Schema<Transaction>({
         enum: ['cash', 'ewallet', 'credit_card'],
         required: true,
     },
+    transactionDate: {
+        type: Date,
+        required: true,
+    },
 }, { timestamps: true });
 
 const Transaction: Model<Transaction> = mongoose.model<Transaction>('Transaction', transactionSchema);

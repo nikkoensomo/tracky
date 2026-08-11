@@ -5,9 +5,11 @@ import SetBudgetButton from "../../buttons/SetBudgetButton";
 
 type DashboardPageHeroProps = {
     onCreateAccount: () => void;
+    onCreateCategory: () => void;
+    onCraeteTransaction: () => void;
 }
 
-const DashboardPageHero = ({ onCreateAccount }: DashboardPageHeroProps ) => {
+const DashboardPageHero = ({ onCreateAccount, onCreateCategory, onCraeteTransaction }: DashboardPageHeroProps ) => {
     return (
         <>
             <section className="flex flex-col gap-4">
@@ -17,9 +19,9 @@ const DashboardPageHero = ({ onCreateAccount }: DashboardPageHeroProps ) => {
                         <span className="text-3xl text-white font-mono">320,032.03</span>
                     </div>
 
-                    <div className="flex justify-center items-center space-x-6 p-4">
+                    <div className="flex justify-center items-center space-x-4 p-4">
                         <AddTransactionButton 
-                            onClick={() => {}}
+                            onClick={onCraeteTransaction}
                         />
 
                         <AddAccountButton 
@@ -27,17 +29,8 @@ const DashboardPageHero = ({ onCreateAccount }: DashboardPageHeroProps ) => {
                         />
 
                         <SetBudgetButton 
-                            onClick={() => {}}
+                            onClick={onCreateCategory}
                         />
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-[2fr_1fr] gap-4">
-                    <div className="bg-whtie border border-gray-200 rounded-lg p-6">
-                        <div className="flex gap-2 items-center">
-                            <ArrowDownUp size={20}/>
-                            <span className="text-slate-800 text-sm">Recent Transactions</span>
-                        </div>
                     </div>
                 </div>
             </section>

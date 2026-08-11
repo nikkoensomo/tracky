@@ -1,4 +1,5 @@
 export type Transaction = {
+    _id: string;
     title: string;
     type: 'income' | 'expense' | 'transfer';
     accountId: {
@@ -16,4 +17,28 @@ export type Transaction = {
     paymentMethod?: 'cash' | 'ewallet' | 'credit_card';
     createdAt: string;
     updatedAt: string;
+    transactionDate: string;
+}
+
+export type TransactionFormData = {
+    accountId: string;
+    categoryId: string;
+    type: 'income' | 'expense' | 'transfer';
+    title: string;
+    amount: number;
+    note?: string;
+    transactionDate: string;
+    paymentMethod: 'cash' | 'ewallet' | 'credit_card';
+}
+
+export type TransactionFormErrors = {
+    accountId?: string;
+    categoryId?: string;
+    type?: string;
+    title?: string;
+    amount?: string;
+    note?: string;
+    transactionDate?: string;
+    paymentMethod?: string;
+    general?: string;
 }

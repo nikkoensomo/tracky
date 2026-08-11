@@ -37,7 +37,7 @@ export const createExpense = async (req: AuthRequest, res: Response) => {
         });
 
         if (!account || !category) {
-            return res.status(200).json({ message: 'Account or Category is invalid'});
+            return res.status(200).json({ message: 'Account or Category is invalid' });
         }
 
         const transaction = await Transaction.create({
@@ -55,12 +55,12 @@ export const createExpense = async (req: AuthRequest, res: Response) => {
         account.currentBalance -= amount;
         await account.save();
 
-        res.status(200).json({ 
+        res.status(200).json({
             message: 'Transaction successful.',
             transaction
         });
     } catch (error) {
-        res.status(500).json({ 
+        res.status(500).json({
             message: 'Server error.',
             error: error instanceof Error ? error.message : 'Unknown error.'
         });
@@ -95,7 +95,7 @@ export const createIncome = async (req: AuthRequest, res: Response) => {
         });
 
         if (!account || !category) {
-            return res.status(400).json({ message: 'Account or Category is invalid.'})
+            return res.status(400).json({ message: 'Account or Category is invalid.' })
         }
 
         const transaction = await Transaction.create({
@@ -118,7 +118,7 @@ export const createIncome = async (req: AuthRequest, res: Response) => {
             transaction
         });
     } catch (error) {
-        res.status(500).json({ 
+        res.status(500).json({
             message: 'Server error.',
             error: error instanceof Error ? error.message : 'Unknown error.'
         });
@@ -134,8 +134,8 @@ export const getUserTransactions = async (req: AuthRequest, res: Response) => {
         const transactions = await Transaction.find({
             userId: req.user._id,
         }).populate([
-            {path: 'accountId', select: ['name', 'type']},
-            {path: 'categoryId', select: ['name', 'type']}
+            { path: 'accountId', select: ['name', 'type'] },
+            { path: 'categoryId', select: ['name', 'type'] }
         ]);
 
         res.status(200).json({
@@ -146,6 +146,34 @@ export const getUserTransactions = async (req: AuthRequest, res: Response) => {
         res.status(500).json({
             message: 'Server error',
             error: error instanceof Error ? error.message : 'Unknown error.'
+        });
+    }
+}
+
+export const getRecentUserTransactions = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.user) {
+            return res.status(400).json({ message: 'Not authorized' });
+        }
+
+        const transactions = await Transaction.find({
+            userId: req.user._id,
+        })
+            .populate([
+                { path: 'accountId', select: ['name', 'type'] },
+                { path: 'categoryId', select: ['name', 'type'] }
+            ])
+            .sort({ createdAt: -1 })
+            .limit(5);
+
+        res.status(200).json({
+            message: 'Recent Transactions:',
+            transactions,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server error',
+            error: error instanceof Error ? error.message : 'Unknown error'
         });
     }
 }
