@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ArrowDownUp } from 'lucide-react';
 import { getRecentTransactionsService } from '../services/transactionService';
-import { getUserAccountsService } from '../services/accountService';
+import { getUserAccountsService, getTotalBalanceService } from '../services/accountService';
 import type { Transaction } from '../types/transaction.types';
 import type { Account } from '../types/account.types';
+import { formatCurrency } from '../utils/formatCurrency';
 
 import DashboardPageHeader from "../components/headers/DashboardPageHeader";
 import DashboardPageHero from "../components/sections/heroes/DashboardPageHero";
@@ -19,6 +20,7 @@ const DashboardPage = () => {
 
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [accounts, setAccounts] = useState<Account[]>([]);
+    const [totalBalance, setTotalBalance] = useState<number>(0);
 
     const [modalMode, setModalMode] = useState<ModalMode>(null);
 
@@ -55,7 +57,25 @@ const DashboardPage = () => {
         }
 
         fetchDashboardData();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        async function fetchTotalBalance() {
+            try {
+                const totalBalance = await getTotalBalanceService();
+
+                setTotalBalance(totalBalance);
+                console.log({
+                    message: 'Total Balance',
+                    totalBalance
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchTotalBalance();
+    }, []);
 
     return (
         <>
@@ -64,6 +84,7 @@ const DashboardPage = () => {
                     onCreateAccount={handleCreateAccount}
                     onCreateCategory={handleCreateCategory}
                     onCraeteTransaction={handleCreateTransaction}
+                    totalBalance={totalBalance}
                 />
 
                 <div className="grid grid-cols-[2fr_1fr] items-start gap-4">
