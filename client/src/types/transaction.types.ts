@@ -17,6 +17,7 @@ export type Transaction = {
     paymentMethod?: 'cash' | 'ewallet' | 'credit_card';
     createdAt: string;
     updatedAt: string;
+    transactionDate: string;
 }
 
 export type TransactionFormData = {

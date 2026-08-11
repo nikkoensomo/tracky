@@ -16,6 +16,7 @@ const RecentTransactionsTable = ({ transactions }: RecentTransactionsTableProps)
                         <th className="py-3 font-medium">Type</th>
                         <th className="py-3 font-medium">Amount</th>
                         <th className="py-3 font-medium">Note</th>
+                        <th className="py-3 font-medium">Date</th>
                     </tr>
                 </thead>
 
