@@ -1,3 +1,11 @@
+export type Account = {
+    _id: string;
+    userId: string;
+    name: string;
+    type: 'cash' | 'ewallet' | 'bank' | 'credit_card';
+    initialBalance: string;
+}
+
 export type AccountFormData = {
     name: string;
     type: 'cash' | 'ewallet' | 'bank' | 'credit_card';

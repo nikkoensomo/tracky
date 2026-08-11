@@ -1,3 +1,10 @@
+export type Category = {
+    _id: string;
+    userId: string;
+    name: string;
+    type: 'income' | 'expense';
+}
+
 export type CategoryFormData = {
     name: string;
     type: 'income' | 'expense';

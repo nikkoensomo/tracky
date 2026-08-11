@@ -1,4 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { Account } from '../../../types/account.types';
+import type { Category } from '../../../types/category.types';
+import { getUserAccountsService } from '../../../services/accountService';
+import { getUserCategoriesService } from '../../../services/categoryService';
 
 import CreateTransactionForm from '../../forms/CreateTransactionForm';
 
@@ -9,6 +13,37 @@ type CreateTransactionModalProps = {
 
 const CreateTransactionModal = ({ isOpen, onClose }: CreateTransactionModalProps) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
+
+    const [accounts, setAccounts] = useState<Account[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    useEffect(() => {
+        if (!isOpen) return;
+
+        async function fetchFormOptions() {
+            try {
+                const accounts = await getUserAccountsService();
+                const categories = await getUserCategoriesService();
+
+                setAccounts(accounts);
+                setCategories(categories);
+
+                console.log({
+                    message: 'User Accounts',
+                    accounts,
+                });
+
+                console.log({
+                    message: 'User Categories',
+                    categories,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchFormOptions();
+    }, [isOpen]);
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
@@ -38,7 +73,9 @@ const CreateTransactionModal = ({ isOpen, onClose }: CreateTransactionModalProps
                         <span className="text-lg font-medium text-slate-700">Create Transaction</span>
 
                         <CreateTransactionForm 
-                                
+                            accounts={accounts}
+                            categories={categories}
+                            onSuccess={onClose}
                         />
                     </div>
                 </div>

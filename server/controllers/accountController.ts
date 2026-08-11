@@ -73,3 +73,29 @@ export const getAccountDetails = async (req: AuthRequest, res: Response) => {
         });
     }
 }
+
+export const getUserAccounts = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.user) {
+            return res.status(400).json({ message: 'Not authorized.' });
+        }
+
+        const accounts = await Account.find({
+            userId: req.user._id,
+        }).populate('userId', 'name');
+
+        if (!accounts) {
+            return res.status(400).json({ message: 'There are no existing account.' });
+        }
+
+        res.status(200).json({
+            message: 'User Accounts:',
+            accounts,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server error.',
+            error: error instanceof Error ? error.message : 'Unknown error'
+        });
+    }
+}
