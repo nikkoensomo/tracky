@@ -10,9 +10,10 @@ type CreateTransactionFormProps = {
     accounts: Account[];
     categories: Category[];
     onSuccess: () => void;
+    onClose: () => void;
 }
 
-const CreateTransactionForm = ({ accounts, categories, onSuccess }: CreateTransactionFormProps ) => {
+const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: CreateTransactionFormProps ) => {
     const [formData, setFormData] = useState<TransactionFormData>({
         accountId: '',
         categoryId: '',
@@ -79,7 +80,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess }: CreateTransa
 
     const handleSubmit = async () => {
         const newErrors: TransactionFormErrors = validate();
-        
+
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
@@ -249,7 +250,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess }: CreateTransa
 
                 <div className="flex items-center justify-end space-x-4 mt-2">
                     <CancelButton 
-                        onClick={() => {}}
+                        onClick={onClose}
                     />
 
                     <CreateButton 

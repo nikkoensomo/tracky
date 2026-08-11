@@ -3,7 +3,8 @@ export type Account = {
     userId: string;
     name: string;
     type: 'cash' | 'ewallet' | 'bank' | 'credit_card';
-    initialBalance: string;
+    initialBalance: number;
+    currentBalance: number;
 }
 
 export type AccountFormData = {

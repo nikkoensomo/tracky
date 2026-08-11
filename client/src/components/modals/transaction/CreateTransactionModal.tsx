@@ -76,6 +76,7 @@ const CreateTransactionModal = ({ isOpen, onClose }: CreateTransactionModalProps
                             accounts={accounts}
                             categories={categories}
                             onSuccess={onClose}
+                            onClose={onClose}
                         />
                     </div>
                 </div>
