@@ -4,11 +4,10 @@ import { getRecentTransactionsService } from '../services/transactionService';
 import { getUserAccountsService, getTotalBalanceService } from '../services/accountService';
 import type { Transaction } from '../types/transaction.types';
 import type { Account } from '../types/account.types';
-import { formatCurrency } from '../utils/formatCurrency';
 
-import DashboardPageHeader from "../components/headers/DashboardPageHeader";
 import DashboardPageHero from "../components/sections/heroes/DashboardPageHero";
 import RecentTransactionsTable from '../components/tables/RecentTransactionsTable';
+import DashboardAccountCards from '../components/cards/DashboardAccountCards';
 
 import CreateAccountModal from '../components/modals/account/CreateAccountModal';
 import CreateCategoryModal from '../components/modals/category/CreateCategoryModal';
@@ -101,17 +100,9 @@ const DashboardPage = () => {
 
                     <div className="flex h-[calc(100vh-14rem)] flex-col gap-4">
                         <div className="grid grid-rows-3 gap-4">
-                            {accounts.map((account) => (
-                                <div className="border border-gray-200 rounded-lg p-6">
-                                    <div key={account._id} className="flex flex-col gap-2">
-                                        <span className="text-sm text-slate-700 font-medium">{account.name}</span>
-                                        <span className="text-sm text-slate-700">Type: {account.type}</span>
-                                        <span className="text-sm text-slate-700">Current Balance: {account.currentBalance}</span>
-                                        <span className="text-sm text-slate-700">Initial Balance: {account.initialBalance}</span>
-                                    </div>
-                                </div>
-
-                            ))}
+                            <DashboardAccountCards 
+                                accounts={accounts}
+                            />
                         </div>
                     </div>
                 </div>
