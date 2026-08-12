@@ -10,6 +10,7 @@ import {
     Settings,
     CircleQuestionMark,
 } from 'lucide-react';
+import LogoutModal from '../modals/LogoutModal';
 import SidebarArrowButton from '../buttons/SidebarArrowButton';
 import LogoutButton from '../buttons/LogoutButton';
 import SidebarNavItem from './SidebarNavItem';
@@ -24,6 +25,8 @@ type NavItemData = {
     to: string;
     end?: boolean;
 }
+
+type ModalModeType = 'logout' | null;
 
 const navItems: NavItemData[] = [
     { label: 'Dashboard', icon: Gauge, to: '/dashboard-page', end: true },
@@ -40,6 +43,31 @@ const navItemsSecondary: NavItemData[] = [
 const Sidebar = () => {
     const navigate = useNavigate();
 
+    const [modalMode, setModalMode] = useState<ModalModeType>(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleOpenLogout = () => {
+        setModalMode('logout');
+    }
+
+    const handleCloseModal = () => {
+        setModalMode(null);
+    }
+ 
+    const handleLogout = async () => {
+        try {
+            setIsLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 400));
+
+            localStorage.removeItem('token');
+            handleCloseModal();
+            navigate('/', { replace: true });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     return (
         <>
@@ -92,12 +120,18 @@ const Sidebar = () => {
 
                         <div className="border-t border-gray-200 pt-4">
                             <LogoutButton
-                                onClick={() => {}}
+                                onClick={handleOpenLogout}
                             />
                         </div>
                     </nav>
                 </div>
             </aside>
+
+            <LogoutModal 
+                isOpen={modalMode === 'logout'}
+                onClose={handleCloseModal}
+                onLogout={handleLogout}
+            />
         </>
     )
 }
