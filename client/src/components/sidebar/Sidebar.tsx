@@ -30,9 +30,9 @@ type ModalModeType = 'logout' | null;
 
 const navItems: NavItemData[] = [
     { label: 'Dashboard', icon: Gauge, to: '/dashboard-page', end: true },
-    { label: 'Accounts', icon: ArrowRightLeft, to: '/' },
-    { label: 'Transactions', icon: ChartBarDecreasing, to: '/' },
-    { label: 'Categories', icon: ShelvingUnit, to: '/' },
+    { label: 'Accounts', icon: ArrowRightLeft, to: '/dashboard-page/accounts' },
+    { label: 'Transactions', icon: ChartBarDecreasing, to: '/dashboard-page/accounts' },
+    { label: 'Categories', icon: ShelvingUnit, to: '/dashboard-page/accounts' },
 ];
 
 const navItemsSecondary: NavItemData[] = [
