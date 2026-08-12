@@ -35,45 +35,42 @@ const DashboardPage = () => {
         setModalMode('category');
     }
 
-    const handleCloseModal = () => {
+    const handleAccountCreated = async () => {
+        await fetchDashboardData();
         setModalMode(null);
     }
 
-    useEffect(() => {
-        async function fetchDashboardData() {
-            try {
-                const transactions = await getRecentTransactionsService();
-                const accounts = await getUserAccountsService();
+    const handleTransactionCreated = async () => {
+        await fetchDashboardData();
+        setModalMode(null);
+    }
 
-                setTransactions(transactions);
-                setAccounts(accounts);
+    const handleCategoryCreated = async () => {
+        await fetchDashboardData();
+        setModalMode(null);
+    }
 
-                console.log(transactions);
-                console.log(accounts);
-            } catch (error) {
-                console.log(error);
-            }
+    const fetchDashboardData = async () => {
+        try {
+            const [transactions, accounts, totalBalance] = await Promise.all([
+                getRecentTransactionsService(),
+                getUserAccountsService(),
+                getTotalBalanceService(),
+            ]);
+
+            setTransactions(transactions);
+            setAccounts(accounts);
+            setTotalBalance(totalBalance);
+
+            console.log(transactions);
+            console.log(accounts);
+        } catch (error) {
+            console.log(error);
         }
+    }
 
+    useEffect(() => {
         fetchDashboardData();
-    }, []);
-
-    useEffect(() => {
-        async function fetchTotalBalance() {
-            try {
-                const totalBalance = await getTotalBalanceService();
-
-                setTotalBalance(totalBalance);
-                console.log({
-                    message: 'Total Balance',
-                    totalBalance
-                });
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        fetchTotalBalance();
     }, []);
 
     return (
@@ -100,7 +97,7 @@ const DashboardPage = () => {
 
                     <div className="flex h-[calc(100vh-14rem)] flex-col gap-4">
                         <div className="grid grid-rows-3 gap-4">
-                            <DashboardAccountCards 
+                            <DashboardAccountCards
                                 accounts={accounts}
                             />
                         </div>
@@ -110,17 +107,17 @@ const DashboardPage = () => {
 
             <CreateAccountModal
                 isOpen={modalMode === 'account'}
-                onClose={handleCloseModal}
+                onClose={handleAccountCreated}
             />
 
             <CreateCategoryModal
                 isOpen={modalMode === 'category'}
-                onClose={handleCloseModal}
+                onClose={handleCategoryCreated}
             />
 
             <CreateTransactionModal
                 isOpen={modalMode === 'transaction'}
-                onClose={handleCloseModal}
+                onClose={handleTransactionCreated}
             />
         </>
     )
