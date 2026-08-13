@@ -15,6 +15,11 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.CLIENT_URL
+].filter(Boolean);
+
 // middleware 
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -33,5 +38,5 @@ app.use("/api/categories", catergoryRoutes);
 // server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 })
