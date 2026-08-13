@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import {
     Gauge,
-    ArrowBigLeftDash,
     ArrowRightLeft,
     ChartBarDecreasing,
     ShelvingUnit,
@@ -17,6 +16,7 @@ import SidebarNavItem from './SidebarNavItem';
 
 type SidebarProps = {
     onClose: () => void;
+    isOpen: boolean;
 }
 
 type NavItemData = {
@@ -40,7 +40,7 @@ const navItemsSecondary: NavItemData[] = [
     { label: 'Help', icon: CircleQuestionMark, to: '/' },
 ]
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     const navigate = useNavigate();
 
     const [modalMode, setModalMode] = useState<ModalModeType>(null);
@@ -53,7 +53,7 @@ const Sidebar = () => {
     const handleCloseModal = () => {
         setModalMode(null);
     }
- 
+
     const handleLogout = async () => {
         try {
             setIsLoading(true);
@@ -71,19 +71,26 @@ const Sidebar = () => {
 
     return (
         <>
-            <aside className="flex flex-col h-screen w-64 shrink-0 border-r border-gray-200 bg-gray-50 px-4 py-5">
+            <aside
+                className={
+                    `flex flex-col h-screen shrink-0 border-r border-gray-200 bg-gray-50 px-4 py-5 transition-all duration-300
+                    ${isOpen ? 'w-64' : 'w-16'}
+                `}>
                 <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
-                        TR
-                    </div>
+                    {isOpen && <>
+                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
+                            TR
+                        </div>
 
-                    <span className="text-2xl font-medium text-teal-950">
-                        Tracky
-                    </span>
+                        <span className="text-2xl font-medium text-teal-950">
+                            Tracky
+                        </span>
+                    </>}
 
                     <div className="ml-auto">
-                        <SidebarArrowButton 
-                            onClick={() => {}}
+                        <SidebarArrowButton
+                            onClick={onClose}
+                            isOpen={isOpen}
                         />
                     </div>
                 </div>
@@ -96,24 +103,26 @@ const Sidebar = () => {
                     <nav className="flex flex-1 flex-col justify-between mt-2">
                         <div className="flex flex-col gap-1">
                             {navItems.map((item) => (
-                                <SidebarNavItem 
+                                <SidebarNavItem
                                     key={item.label}
                                     label={item.label}
                                     icon={item.icon}
                                     to={item.to}
                                     end={item.end}
+                                    isOpen={isOpen}
                                 />
                             ))}
 
                             <span className="text-gray-400 text-sm font-medium px-3 mt-4">Support</span>
 
                             {navItemsSecondary.map((item) => (
-                                <SidebarNavItem 
+                                <SidebarNavItem
                                     key={item.label}
                                     label={item.label}
                                     icon={item.icon}
                                     to={item.to}
                                     end={item.end}
+                                    isOpen={isOpen}
                                 />
                             ))}
                         </div>
@@ -127,7 +136,7 @@ const Sidebar = () => {
                 </div>
             </aside>
 
-            <LogoutModal 
+            <LogoutModal
                 isOpen={modalMode === 'logout'}
                 onClose={handleCloseModal}
                 onLogout={handleLogout}
