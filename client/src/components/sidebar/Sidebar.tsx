@@ -30,14 +30,14 @@ type ModalModeType = 'logout' | null;
 
 const navItems: NavItemData[] = [
     { label: 'Dashboard', icon: Gauge, to: '/dashboard-page', end: true },
-    { label: 'Accounts', icon: ArrowRightLeft, to: '/dashboard-page/accounts' },
-    { label: 'Transactions', icon: ChartBarDecreasing, to: '/dashboard-page/accounts' },
-    { label: 'Categories', icon: ShelvingUnit, to: '/dashboard-page/accounts' },
+    { label: 'Accounts', icon: ArrowRightLeft, to: '/dashboard-page/accounts-page' },
+    { label: 'Transactions', icon: ChartBarDecreasing, to: '/dashboard-page/transactions-page' },
+    { label: 'Categories', icon: ShelvingUnit, to: '/dashboard-page/categories-page' },
 ];
 
 const navItemsSecondary: NavItemData[] = [
-    { label: 'Settings', icon: Settings, to: '/', end: true },
-    { label: 'Help', icon: CircleQuestionMark, to: '/' },
+    { label: 'Settings', icon: Settings, to: '/dashboard-page/settings-page', end: true },
+    { label: 'Help', icon: CircleQuestionMark, to: '/dashboard-page/help-page' },
 ]
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
