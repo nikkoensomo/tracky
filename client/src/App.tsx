@@ -10,6 +10,7 @@ import TransactionsPage from './pages/TransactionsPage'
 import CategoriesPage from './pages/CategoriesPage'
 import SettingsPage from './pages/SettingsPage'
 import HelpPage from './pages/HelpPage'
+import ProtectedRoute from './components/routes/ProtectedRoute'
 
 function App() {
 
@@ -18,7 +19,11 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage /> } />
 
-        <Route path="/dashboard-page" element={<DashboardLayout /> }>
+        <Route path="/dashboard-page" element={ 
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }>
           <Route index element={<DashboardPage />} />
           <Route path="accounts-page" element={<AccountsPage /> } />
           <Route path="transactions-page" element={<TransactionsPage /> } />
