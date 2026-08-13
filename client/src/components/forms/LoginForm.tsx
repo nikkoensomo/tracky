@@ -23,7 +23,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         general: '',
     });
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -58,7 +58,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         }
 
         try {
-            setIsLoading(true);
+            // setIsLoading(true);
 
             const data = await loginService(formData);
             console.log({
@@ -76,7 +76,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 general: error instanceof Error ? error.message : 'Unknown error.'
             });
         } finally {
-            setIsLoading(false);
+            // setIsLoading(false);
         }
     }
 

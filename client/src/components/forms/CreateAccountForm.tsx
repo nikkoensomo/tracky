@@ -25,7 +25,7 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
         general: '',
     });
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,7 +59,7 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
         }
 
         try {
-            setIsLoading(true);
+            // setIsLoading(true);
 
             const payload = await createAccountService(formData);
 
@@ -74,7 +74,7 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
                 general: error instanceof Error ? error.message : 'Unkown error.'
             });
         } finally {
-            setIsLoading(false);
+            // setIsLoading(false);
         }
     }
 

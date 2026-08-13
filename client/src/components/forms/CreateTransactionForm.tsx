@@ -37,7 +37,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
         general: '',
     })
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -87,7 +87,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
         }
 
         try {
-            setIsLoading(true);
+            // setIsLoading(true);
 
             if (formData.type === 'expense') {
                 const transaction = await createExpenseService(formData);
@@ -105,7 +105,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
                 general: error instanceof Error ? error.message : 'Unkown error'
             })
         } finally {
-            setIsLoading(false);
+            // setIsLoading(false);
         }
     }
 

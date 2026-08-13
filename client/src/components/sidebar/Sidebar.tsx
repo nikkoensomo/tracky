@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     const navigate = useNavigate();
 
     const [modalMode, setModalMode] = useState<ModalModeType>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const handleOpenLogout = () => {
         setModalMode('logout');
@@ -56,7 +56,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
     const handleLogout = async () => {
         try {
-            setIsLoading(true);
+            // setIsLoading(true);
             await new Promise((resolve) => setTimeout(resolve, 400));
 
             localStorage.removeItem('token');
@@ -65,7 +65,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         } catch (error) {
             console.log(error);
         } finally {
-            setIsLoading(false);
+            // setIsLoading(false);
         }
     }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import CancelButton from '../buttons/reusable/CancelButton';
 import ConfirmButton from '../buttons/reusable/ConfirmButton';
 

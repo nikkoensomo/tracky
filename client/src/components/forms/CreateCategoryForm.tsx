@@ -21,7 +21,7 @@ const CreateCategoryForm = ({ onSuccess, onClose }: CategoryFormProps ) => {
         general: '',
     });
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({...formData, [e.target.name]: e.target.value});
@@ -51,7 +51,7 @@ const CreateCategoryForm = ({ onSuccess, onClose }: CategoryFormProps ) => {
         }
 
         try {
-            setIsLoading(true);
+            // setIsLoading(true);
 
             const payload = await createCategoryService(formData);
 
@@ -67,7 +67,7 @@ const CreateCategoryForm = ({ onSuccess, onClose }: CategoryFormProps ) => {
                 general: error instanceof Error ? error.message : 'Unknown error',
             });
         } finally {
-            setIsLoading(false);
+            // setIsLoading(false);
         }
     }
 
