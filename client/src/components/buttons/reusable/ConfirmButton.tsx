@@ -1,9 +1,8 @@
 type ButtonProps = {
     onClick: () => void;
-    label?: string;
 }
 
-const CreateButton = ({ onClick, label }: ButtonProps ) => {
+const ConfirmButton = ({ onClick }: ButtonProps ) => {
     return (
         <>
             <button
@@ -11,10 +10,10 @@ const CreateButton = ({ onClick, label }: ButtonProps ) => {
                 className="text-white bg-teal-700 hover:bg-teal-800 px-4 py-2 cursor-pointer rounded-lg"
                 onClick={onClick}
             >
-                {label ? label : "Create"}
+                Confirm
             </button>
         </>
     )
 }
 
-export default CreateButton;
+export default ConfirmButton;

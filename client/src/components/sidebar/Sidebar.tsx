@@ -3,19 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import {
     Gauge,
-    ArrowBigLeftDash,
     ArrowRightLeft,
     ChartBarDecreasing,
     ShelvingUnit,
     Settings,
     CircleQuestionMark,
 } from 'lucide-react';
+import LogoutModal from '../modals/LogoutModal';
 import SidebarArrowButton from '../buttons/SidebarArrowButton';
 import LogoutButton from '../buttons/LogoutButton';
 import SidebarNavItem from './SidebarNavItem';
 
 type SidebarProps = {
     onClose: () => void;
+    isOpen: boolean;
 }
 
 type NavItemData = {
@@ -25,37 +26,71 @@ type NavItemData = {
     end?: boolean;
 }
 
+type ModalModeType = 'logout' | null;
+
 const navItems: NavItemData[] = [
     { label: 'Dashboard', icon: Gauge, to: '/dashboard-page', end: true },
-    { label: 'Accounts', icon: ArrowRightLeft, to: '/' },
-    { label: 'Transactions', icon: ChartBarDecreasing, to: '/' },
-    { label: 'Categories', icon: ShelvingUnit, to: '/' },
+    { label: 'Accounts', icon: ArrowRightLeft, to: '/dashboard-page/accounts-page' },
+    { label: 'Transactions', icon: ChartBarDecreasing, to: '/dashboard-page/transactions-page' },
+    { label: 'Categories', icon: ShelvingUnit, to: '/dashboard-page/categories-page' },
 ];
 
 const navItemsSecondary: NavItemData[] = [
-    { label: 'Settings', icon: Settings, to: '/', end: true },
-    { label: 'Help', icon: CircleQuestionMark, to: '/' },
+    { label: 'Settings', icon: Settings, to: '/dashboard-page/settings-page', end: true },
+    { label: 'Help', icon: CircleQuestionMark, to: '/dashboard-page/help-page' },
 ]
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     const navigate = useNavigate();
 
+    const [modalMode, setModalMode] = useState<ModalModeType>(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleOpenLogout = () => {
+        setModalMode('logout');
+    }
+
+    const handleCloseModal = () => {
+        setModalMode(null);
+    }
+
+    const handleLogout = async () => {
+        try {
+            setIsLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 400));
+
+            localStorage.removeItem('token');
+            handleCloseModal();
+            navigate('/', { replace: true });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     return (
         <>
-            <aside className="flex flex-col h-screen w-64 shrink-0 border-r border-gray-200 bg-gray-50 px-4 py-5">
+            <aside
+                className={
+                    `flex flex-col h-screen shrink-0 border-r border-gray-200 bg-gray-50 px-4 py-5 transition-all duration-300
+                    ${isOpen ? 'w-64' : 'w-16'}
+                `}>
                 <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
-                        TR
-                    </div>
+                    {isOpen && <>
+                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
+                            TR
+                        </div>
 
-                    <span className="text-2xl font-medium text-teal-950">
-                        Tracky
-                    </span>
+                        <span className="text-2xl font-medium text-teal-950">
+                            Tracky
+                        </span>
+                    </>}
 
                     <div className="ml-auto">
-                        <SidebarArrowButton 
-                            onClick={() => {}}
+                        <SidebarArrowButton
+                            onClick={onClose}
+                            isOpen={isOpen}
                         />
                     </div>
                 </div>
@@ -68,36 +103,44 @@ const Sidebar = () => {
                     <nav className="flex flex-1 flex-col justify-between mt-2">
                         <div className="flex flex-col gap-1">
                             {navItems.map((item) => (
-                                <SidebarNavItem 
+                                <SidebarNavItem
                                     key={item.label}
                                     label={item.label}
                                     icon={item.icon}
                                     to={item.to}
                                     end={item.end}
+                                    isOpen={isOpen}
                                 />
                             ))}
 
                             <span className="text-gray-400 text-sm font-medium px-3 mt-4">Support</span>
 
                             {navItemsSecondary.map((item) => (
-                                <SidebarNavItem 
+                                <SidebarNavItem
                                     key={item.label}
                                     label={item.label}
                                     icon={item.icon}
                                     to={item.to}
                                     end={item.end}
+                                    isOpen={isOpen}
                                 />
                             ))}
                         </div>
 
                         <div className="border-t border-gray-200 pt-4">
                             <LogoutButton
-                                onClick={() => {}}
+                                onClick={handleOpenLogout}
                             />
                         </div>
                     </nav>
                 </div>
             </aside>
+
+            <LogoutModal
+                isOpen={modalMode === 'logout'}
+                onClose={handleCloseModal}
+                onLogout={handleLogout}
+            />
         </>
     )
 }

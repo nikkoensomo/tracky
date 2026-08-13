@@ -1,8 +1,9 @@
 type ButtonProps = {
     onClick: () => void;
+    label?: string;
 }
 
-const CancelButton = ({ onClick }: ButtonProps) => {
+const CancelButton = ({ onClick, label }: ButtonProps) => {
     return (
         <>
             <button
@@ -10,7 +11,7 @@ const CancelButton = ({ onClick }: ButtonProps) => {
                 className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
                 onClick={onClick}
             >
-                Cancel
+                {label ? label : "Cancel"}
             </button>
         </>
     )

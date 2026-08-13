@@ -99,3 +99,28 @@ export const getUserAccounts = async (req: AuthRequest, res: Response) => {
         });
     }
 }
+
+export const getTotalBalance = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!req.user) {
+            return res.status(400).json({ message: 'Not authorized.'});
+        }
+
+        const result = await Account.aggregate([
+            { $match: { userId: req.user._id } },
+            { $group: { _id: null, totalBalance: { $sum: '$currentBalance'}} },
+        ]);
+
+        const totalBalance = result[0]?.totalBalance || 0;
+
+        res.status(200).json({
+            message: 'Total Balance:',
+            totalBalance,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server error.',
+            error: error instanceof Error ? error.message : 'Unknown error.'
+        });
+    }
+}

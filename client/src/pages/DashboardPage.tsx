@@ -1,24 +1,26 @@
 import { useState, useEffect } from 'react';
 import { ArrowDownUp } from 'lucide-react';
 import { getRecentTransactionsService } from '../services/transactionService';
-import { getUserAccountsService } from '../services/accountService';
+import { getUserAccountsService, getTotalBalanceService } from '../services/accountService';
 import type { Transaction } from '../types/transaction.types';
 import type { Account } from '../types/account.types';
 
-import DashboardPageHeader from "../components/headers/DashboardPageHeader";
 import DashboardPageHero from "../components/sections/heroes/DashboardPageHero";
 import RecentTransactionsTable from '../components/tables/RecentTransactionsTable';
+import DashboardAccountCards from '../components/cards/DashboardAccountCards';
 
 import CreateAccountModal from '../components/modals/account/CreateAccountModal';
 import CreateCategoryModal from '../components/modals/category/CreateCategoryModal';
 import CreateTransactionModal from '../components/modals/transaction/CreateTransactionModal';
+import CreateAccountFirstModal from '../components/modals/account/CreateAccountFirstModal';
 
-type ModalMode = 'account' | 'transaction' | 'category' | null;
+type ModalMode = 'account' | 'transaction' | 'category' | 'account-required' | null;
 
 const DashboardPage = () => {
 
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [accounts, setAccounts] = useState<Account[]>([]);
+    const [totalBalance, setTotalBalance] = useState<number>(0);
 
     const [modalMode, setModalMode] = useState<ModalMode>(null);
 
@@ -27,6 +29,11 @@ const DashboardPage = () => {
     }
 
     const handleCreateTransaction = () => {
+        if (accounts.length === 0) {
+            setModalMode('account-required');
+            return;
+        }
+
         setModalMode('transaction');
     }
 
@@ -34,28 +41,43 @@ const DashboardPage = () => {
         setModalMode('category');
     }
 
-    const handleCloseModal = () => {
+    const handleAccountCreated = async () => {
+        await fetchDashboardData();
         setModalMode(null);
     }
 
-    useEffect(() => {
-        async function fetchDashboardData() {
-            try {
-                const transactions = await getRecentTransactionsService();
-                const accounts = await getUserAccountsService();
+    const handleTransactionCreated = async () => {
+        await fetchDashboardData();
+        setModalMode(null);
+    }
 
-                setTransactions(transactions);
-                setAccounts(accounts);
+    const handleCategoryCreated = async () => {
+        await fetchDashboardData();
+        setModalMode(null);
+    }
 
-                console.log(transactions);
-                console.log(accounts);
-            } catch (error) {
-                console.log(error);
-            }
+    const fetchDashboardData = async () => {
+        try {
+            const [transactions, accounts, totalBalance] = await Promise.all([
+                getRecentTransactionsService(),
+                getUserAccountsService(),
+                getTotalBalanceService(),
+            ]);
+
+            setTransactions(transactions);
+            setAccounts(accounts);
+            setTotalBalance(totalBalance);
+
+            console.log(transactions);
+            console.log(accounts);
+        } catch (error) {
+            console.log(error);
         }
+    }
 
+    useEffect(() => {
         fetchDashboardData();
-    }, [])
+    }, []);
 
     return (
         <>
@@ -63,7 +85,8 @@ const DashboardPage = () => {
                 <DashboardPageHero
                     onCreateAccount={handleCreateAccount}
                     onCreateCategory={handleCreateCategory}
-                    onCraeteTransaction={handleCreateTransaction}
+                    onCreateTransaction={handleCreateTransaction}
+                    totalBalance={totalBalance}
                 />
 
                 <div className="grid grid-cols-[2fr_1fr] items-start gap-4">
@@ -80,17 +103,9 @@ const DashboardPage = () => {
 
                     <div className="flex h-[calc(100vh-14rem)] flex-col gap-4">
                         <div className="grid grid-rows-3 gap-4">
-                            {accounts.map((account) => (
-                                <div className="border border-gray-200 rounded-lg p-6">
-                                    <div key={account._id} className="flex flex-col gap-2">
-                                        <span className="text-sm text-slate-700 font-medium">{account.name}</span>
-                                        <span className="text-sm text-slate-700">Type: {account.type}</span>
-                                        <span className="text-sm text-slate-700">Current Balance: {account.currentBalance}</span>
-                                        <span className="text-sm text-slate-700">Initial Balance: {account.initialBalance}</span>
-                                    </div>
-                                </div>
-
-                            ))}
+                            <DashboardAccountCards
+                                accounts={accounts}
+                            />
                         </div>
                     </div>
                 </div>
@@ -98,17 +113,23 @@ const DashboardPage = () => {
 
             <CreateAccountModal
                 isOpen={modalMode === 'account'}
-                onClose={handleCloseModal}
+                onClose={handleAccountCreated}
             />
 
             <CreateCategoryModal
                 isOpen={modalMode === 'category'}
-                onClose={handleCloseModal}
+                onClose={handleCategoryCreated}
             />
 
             <CreateTransactionModal
                 isOpen={modalMode === 'transaction'}
-                onClose={handleCloseModal}
+                onClose={handleTransactionCreated}
+            />
+
+            <CreateAccountFirstModal 
+                isOpen={modalMode === 'account-required'}
+                onClose={handleAccountCreated}
+                onCreateAccount={() => setModalMode('account')}
             />
         </>
     )

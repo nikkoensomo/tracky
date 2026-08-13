@@ -6,9 +6,10 @@ type SidebarNavItemProps = {
     icon: LucideIcon;
     to: string;
     end?: boolean;
+    isOpen: boolean;
 }
 
-const SidebarNavItem = ({ label, icon: Icon, to, end = false }: SidebarNavItemProps) => {
+const SidebarNavItem = ({ label, icon: Icon, to, end = false, isOpen }: SidebarNavItemProps) => {
     return (
         <>
             <NavLink
@@ -22,7 +23,7 @@ const SidebarNavItem = ({ label, icon: Icon, to, end = false }: SidebarNavItemPr
                 }
             >
                 {Icon && <Icon className={`h-5 w-5 shrink-0`} />}
-                <span>{ label }</span>
+                {isOpen && <span>{ label }</span>}
             </NavLink>
         </>
     )
