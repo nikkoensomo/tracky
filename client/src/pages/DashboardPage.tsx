@@ -12,8 +12,9 @@ import DashboardAccountCards from '../components/cards/DashboardAccountCards';
 import CreateAccountModal from '../components/modals/account/CreateAccountModal';
 import CreateCategoryModal from '../components/modals/category/CreateCategoryModal';
 import CreateTransactionModal from '../components/modals/transaction/CreateTransactionModal';
+import CreateAccountFirstModal from '../components/modals/account/CreateAccountFirstModal';
 
-type ModalMode = 'account' | 'transaction' | 'category' | null;
+type ModalMode = 'account' | 'transaction' | 'category' | 'account-required' | null;
 
 const DashboardPage = () => {
 
@@ -28,6 +29,11 @@ const DashboardPage = () => {
     }
 
     const handleCreateTransaction = () => {
+        if (accounts.length === 0) {
+            setModalMode('account-required');
+            return;
+        }
+
         setModalMode('transaction');
     }
 
@@ -79,7 +85,7 @@ const DashboardPage = () => {
                 <DashboardPageHero
                     onCreateAccount={handleCreateAccount}
                     onCreateCategory={handleCreateCategory}
-                    onCraeteTransaction={handleCreateTransaction}
+                    onCreateTransaction={handleCreateTransaction}
                     totalBalance={totalBalance}
                 />
 
@@ -118,6 +124,12 @@ const DashboardPage = () => {
             <CreateTransactionModal
                 isOpen={modalMode === 'transaction'}
                 onClose={handleTransactionCreated}
+            />
+
+            <CreateAccountFirstModal 
+                isOpen={modalMode === 'account-required'}
+                onClose={handleAccountCreated}
+                onCreateAccount={() => setModalMode('account')}
             />
         </>
     )

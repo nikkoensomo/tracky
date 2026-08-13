@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Category from '../models/Category.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import type { Request, Response } from 'express';
@@ -23,6 +24,12 @@ export const signup = async (req: Request, res: Response) => {
             password: hashedPassword,
         });
 
+        await Category.insertMany([
+            { userId: user._id, name: 'Food', type: 'expense' },
+            { userId: user._id, name: 'Transport', type: 'expense' },
+            { userId: user._id, name: 'Allowance', type: 'income' },
+        ]);
+
         // generate token
         const token = jwt.sign(
             { id: user._id },
@@ -36,7 +43,7 @@ export const signup = async (req: Request, res: Response) => {
                 id: user._id,
                 username: user.username,
                 email: user.email,
-            }
+            },
         });
     } catch (error) {
         res.status(500).json({
