@@ -1,4 +1,3 @@
-import { ArrowDownUp } from 'lucide-react';
 import { formatCurrency } from '../../../utils/formatCurrency';
 import AddAccountButton from "../../buttons/AddAccountButton";
 import AddTransactionButton from "../../buttons/AddTransactionButton";
