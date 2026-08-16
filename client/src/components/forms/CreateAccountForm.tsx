@@ -141,6 +141,7 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
                     />
                     <CreateButton
                         onClick={handleSubmit}
+                        isDisabled={isLoading}
                         label={isLoading ? (
                             <>
                                 Creating...

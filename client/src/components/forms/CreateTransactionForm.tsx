@@ -3,6 +3,7 @@ import type { TransactionFormData, TransactionFormErrors } from "../../types/tra
 import type { Account } from '../../types/account.types';
 import type { Category } from '../../types/category.types';
 import { createExpenseService } from '../../services/transactionService';
+import { LoaderCircle } from 'lucide-react';
 import CancelButton from '../buttons/reusable/CancelButton';
 import CreateButton from '../buttons/reusable/SubmitButton';
 
@@ -37,7 +38,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
         general: '',
     })
 
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -87,7 +88,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
         }
 
         try {
-            // setIsLoading(true);
+            setIsLoading(true);
 
             if (formData.type === 'expense') {
                 const transaction = await createExpenseService(formData);
@@ -105,7 +106,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
                 general: error instanceof Error ? error.message : 'Unkown error'
             })
         } finally {
-            // setIsLoading(false);
+            setIsLoading(false);
         }
     }
 
@@ -255,6 +256,15 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
 
                     <CreateButton 
                         onClick={handleSubmit}
+                        isDisabled={isLoading}
+                        label={isLoading ? (
+                            <>
+                                Creating...
+                                <LoaderCircle size={20} />
+                            </>
+                        ) : (
+                            'Create'
+                        )}
                     />
                 </div>
 
