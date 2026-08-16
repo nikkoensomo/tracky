@@ -101,7 +101,7 @@ const DashboardPage = () => {
                         />
                     </div>
 
-                    <div className="flex h-[calc(100vh-14rem)] flex-col gap-4">
+                    <div className="flex h-[calc(100vh-14rem)] flex-col gap-4 overflow-auto">
                         <div className="grid grid-rows-3 gap-4">
                             <DashboardAccountCards
                                 accounts={accounts}
