@@ -10,7 +10,6 @@ const DashboardPageHeader = () => {
                     placeholder="Search"
                 />
 
-                <span className="text-slate-700 font-semibold">Hola Cretsyy!</span>
             </header>
         </>
     )
