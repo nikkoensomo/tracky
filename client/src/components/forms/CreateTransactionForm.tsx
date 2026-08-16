@@ -260,7 +260,7 @@ const CreateTransactionForm = ({ accounts, categories, onSuccess, onClose }: Cre
                         label={isLoading ? (
                             <>
                                 Creating...
-                                <LoaderCircle size={20} />
+                                <LoaderCircle className="animate-spin" size={20} />
                             </>
                         ) : (
                             'Create'

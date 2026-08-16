@@ -172,7 +172,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                     label={isLoading ? (
                         <>
                             Signing up...
-                            <LoaderCircle size={20} />
+                            <LoaderCircle className="animate-spin" size={20} />
                         </>
                     ) : (
                         'Sign Up'
