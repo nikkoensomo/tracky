@@ -49,7 +49,7 @@ const LogoutModal = ({ isOpen, onClose, onLogout, isLoading }: LogoutModalProps)
                                 isDisabled={isLoading}
                                 label={isLoading ? (
                                     <>
-                                        <LoaderCircle size={20} />
+                                        <LoaderCircle className="animate-spin" size={20} />
                                     </>
                                 ) : (
                                     'Logout'

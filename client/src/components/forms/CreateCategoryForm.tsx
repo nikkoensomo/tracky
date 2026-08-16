@@ -114,7 +114,7 @@ const CreateCategoryForm = ({ onSuccess, onClose }: CategoryFormProps ) => {
                         label={isLoading ? (
                             <>
                                 Creating...
-                                <LoaderCircle size={20} />
+                                <LoaderCircle className="animate-spin" size={20} />
                             </>
                         ) : (
                             'Create'

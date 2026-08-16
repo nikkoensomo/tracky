@@ -109,7 +109,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
                     label={isLoading ? (
                         <>
                             Logging in...
-                            <LoaderCircle size={20} />
+                            <LoaderCircle className="animate-spin" size={20} />
                         </>
                     ) : (
                      'Login'   
