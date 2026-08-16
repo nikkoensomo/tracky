@@ -163,7 +163,7 @@ export const getRecentUserTransactions = async (req: AuthRequest, res: Response)
                 { path: 'accountId', select: ['name', 'type'] },
                 { path: 'categoryId', select: ['name', 'type'] }
             ])
-            .sort({ createdAt: -1 })
+            .sort({ transactionDate: -1, createdAt: -1 })
             .limit(5);
 
         res.status(200).json({
