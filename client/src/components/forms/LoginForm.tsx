@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginService } from '../../services/authService';
 import type { RegisterFormError, LoginFormData, LoginFormError } from '../../types/auth.types';
 import SubmitFormButton from '../buttons/SubmitFormButton';
+import { LoaderCircle } from 'lucide-react';
 
 type LoginFormProps = {
     onSuccess: () => void;
@@ -23,7 +24,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         general: '',
     });
 
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -58,7 +59,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         }
 
         try {
-            // setIsLoading(true);
+            setIsLoading(true);
 
             const data = await loginService(formData);
             console.log({
@@ -76,7 +77,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 general: error instanceof Error ? error.message : 'Unknown error.'
             });
         } finally {
-            // setIsLoading(false);
+            setIsLoading(false);
         }
     }
 
@@ -105,7 +106,14 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
                 <SubmitFormButton 
                     onClick={handleSubmit}
-                    label='Login'
+                    label={isLoading ? (
+                        <>
+                            Logging in...
+                            <LoaderCircle size={20} />
+                        </>
+                    ) : (
+                     'Login'   
+                    )}
                 />
             </div>
         </>

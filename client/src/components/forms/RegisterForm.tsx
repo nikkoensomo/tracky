@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signupService } from '../../services/authService';
 import type { RegisterFormData, RegisterFormError } from '../../types/auth.types';
+import { LoaderCircle } from 'lucide-react';
 import SubmitFormButton from '../buttons/SubmitFormButton';
 
 type RegisterFormProps = {
@@ -31,7 +32,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         general: '',
     });
 
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({...formData, [e.target.name]: e.target.value });
@@ -83,7 +84,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         }
 
         try {
-            // setIsLoading(true);
+            setIsLoading(true);
 
             const { confirmPassword, ...dataToSend} = formData;
             const data = await signupService(dataToSend);
@@ -98,7 +99,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 general: error instanceof Error ? error.message : 'Something went wrong' 
             });
         } finally {
-            // setIsLoading(false);
+            setIsLoading(false);
         }
     }
 
@@ -166,22 +167,16 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 />
                 {formErrors.confirmPassword && <p className="text-red-500 text-xs">{formErrors.confirmPassword}</p>}
 
-                {/* <BigBlackButton
-                    label={isLoading ? (
-                        <>
-                            Creating Account
-                            <LoaderCircle className="animate-spin" size={20}/>
-                        </>
-                    ) : (
-                        "Create Account"
-                    )}
-                    onClick={handleSubmit}
-                    isDisabled={isLoading}
-                /> */}
-
                 <SubmitFormButton 
                     onClick={handleSubmit}
-                    label='Sign up'
+                    label={isLoading ? (
+                        <>
+                            Signing up...
+                            <LoaderCircle size={20} />
+                        </>
+                    ) : (
+                        'Sign Up'
+                    )}
                 />
             </div>
         </>

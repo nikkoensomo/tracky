@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { AccountFormData, AccountFormErrors } from "../../types/account.types";
 import { createAccountService } from '../../services/transactionService';
+import { LoaderCircle } from 'lucide-react';
 
 import CreateButton from '../buttons/reusable/SubmitButton';
 import CancelButton from '../buttons/reusable/CancelButton';
@@ -25,7 +26,7 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
         general: '',
     });
 
-    // const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,7 +60,7 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
         }
 
         try {
-            // setIsLoading(true);
+            setIsLoading(true);
 
             const payload = await createAccountService(formData);
 
@@ -74,7 +75,7 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
                 general: error instanceof Error ? error.message : 'Unkown error.'
             });
         } finally {
-            // setIsLoading(false);
+            setIsLoading(false);
         }
     }
 
@@ -140,6 +141,15 @@ const CreateAccountForm = ({ onClose, onSuccess}: CreateAccountFormProps ) => {
                     />
                     <CreateButton
                         onClick={handleSubmit}
+                        isDisabled={isLoading}
+                        label={isLoading ? (
+                            <>
+                                Creating...
+                                <LoaderCircle size={20} />
+                            </>
+                        ) : (
+                            'Create'
+                        )}
                     />
                 </div>
             </div>
