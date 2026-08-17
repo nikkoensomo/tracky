@@ -5,6 +5,7 @@ import LoginModal from "../components/modals/LoginModal";
 import RegisterModal from "../components/modals/RegisterModal";
 import LandingPageHero from '../components/sections/heroes/LandingPageHero';
 import AboutUsSection from '../components/sections/AboutUsSection';
+import ContactUsSection from '../components/sections/ContactUsSection';
 
 const LandingPage = () => {
     type ModalMode = 'login' | 'register' | null;
@@ -33,6 +34,7 @@ const LandingPage = () => {
             <main>
                 <LandingPageHero />
                 <AboutUsSection />
+                <ContactUsSection />
             </main>
 
             <LoginModal 

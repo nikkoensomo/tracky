@@ -1,5 +1,3 @@
-import { NavLink } from "react-router-dom";
-
 import LoginHeaderButton from "../buttons/LoginHeaderButton";
 import SignUpHeaderButton from "../buttons/SignUpHeaderButton";
 
@@ -20,9 +18,7 @@ const LandingPageHeader = ({ onLogin, onRegister }: ModalProps ) => {
 
                         <a href="#about" className="hover:text-slate-900">About Us</a>
 
-                        <NavLink to="/" className="hover:text-slate-900">
-                            Contact Us
-                        </NavLink>
+                        <a href="#contact" className="hover:text-slate-900">Contact Us</a>
                     </nav>
 
                     <div className="flex justify-end gap-3">
