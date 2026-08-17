@@ -13,7 +13,7 @@ const LandingPageHero = () => {
 
     return (
         <>
-            <section className="flex flex-col gap-6 px-4 py-20 items-center text-center">
+            <section id="home" className="flex flex-col gap-6 px-4 py-20 items-center text-center">
                     <h1 className="text-5xl text-slate-950 font-bold max-w-2xl"> 
                         Know where every peso goes - automatically
                     </h1>

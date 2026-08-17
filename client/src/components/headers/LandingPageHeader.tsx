@@ -16,13 +16,9 @@ const LandingPageHeader = ({ onLogin, onRegister }: ModalProps ) => {
                     <span className="text-xl font-bold text-zinc-950">Tracky</span>
 
                     <nav className="hidden justify-center gap-6 text-sm font-medium text-gray-600 md:flex">
-                        <NavLink to="/" className="hover:text-slate-900">
-                            Home
-                        </NavLink>
+                        <a href="#home" className="hover:text-slate-900">Home</a>
 
-                        <NavLink to="/" className="hover:text-slate-900">
-                            About Us
-                        </NavLink>
+                        <a href="#about" className="hover:text-slate-900">About Us</a>
 
                         <NavLink to="/" className="hover:text-slate-900">
                             Contact Us
