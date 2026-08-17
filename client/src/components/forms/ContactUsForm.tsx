@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { ContactFormData, ContactFormErrors } from "../../types/contact.types";
-import { Loader, LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react';
 import CreateButton from '../buttons/reusable/SubmitButton';
 
 const ContactUsForm = () => {
