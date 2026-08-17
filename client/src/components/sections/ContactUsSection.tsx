@@ -1,4 +1,3 @@
-import { Contact } from "lucide-react";
 import ContactUsForm from "../forms/ContactUsForm";
 
 const ContactUsSection = () => {
