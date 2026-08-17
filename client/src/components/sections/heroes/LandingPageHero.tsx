@@ -1,6 +1,7 @@
 import { Check } from 'lucide-react';
 import CTAButtonOne from "../../buttons/CTAButtonOne";
 import CTAButtonTwo from "../../buttons/CTAButtonTwo";
+import MockupCard from '../../cards/landing/MockupCard';
 
 const LandingPageHero = () => {
     const handleStart = () => {
@@ -14,8 +15,8 @@ const LandingPageHero = () => {
     return (
         <>
             <section id="home" className="flex flex-col gap-6 px-4 py-20 items-center text-center">
-                    <h1 className="text-5xl text-slate-950 font-bold max-w-2xl"> 
-                        Know where every peso goes - automatically
+                    <h1 className="text-5xl text-slate-950 font-bold max-w-3xl"> 
+                        Track every peso with less effort
                     </h1>
 
                     <p className="text-sm text-slate-500 font-medium max-w-xl mb-4">
@@ -49,6 +50,7 @@ const LandingPageHero = () => {
                         </div>
                     </div>
 
+                    <MockupCard />
             </section>
         </>
     )
