@@ -13,6 +13,7 @@ import LogoutModal from '../modals/LogoutModal';
 import SidebarArrowButton from '../buttons/SidebarArrowButton';
 import LogoutButton from '../buttons/LogoutButton';
 import SidebarNavItem from './SidebarNavItem';
+import trackyIcon from '../../../src/assets/illustrations/tracky-icon.png'
 
 type SidebarProps = {
     onClose: () => void;
@@ -78,11 +79,13 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 `}>
                 <div className="flex items-center gap-4">
                     {isOpen && <>
-                        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
-                            TR
-                        </div>
+                        <img
+                            src={trackyIcon}
+                            alt="tracky icon"
+                            className="h-10 object-contain"
+                        />
 
-                        <span className="text-2xl font-medium text-teal-950">
+                        <span className="text-lg font-medium text-teal-950">
                             Tracky
                         </span>
                     </>}
