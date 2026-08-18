@@ -1,17 +1,22 @@
 import LoginHeaderButton from "../buttons/LoginHeaderButton";
 import SignUpHeaderButton from "../buttons/SignUpHeaderButton";
+import trackyIcon from '../../../src/assets/illustrations/tracky-icon.png'
 
 type ModalProps = {
     onLogin: () => void;
     onRegister: () => void;
 }
 
-const LandingPageHeader = ({ onLogin, onRegister }: ModalProps ) => {
+const LandingPageHeader = ({ onLogin, onRegister }: ModalProps) => {
     return (
         <>
             <header className="sticky top-0 z-40 w-full border-b border-gray-200 bg-slate-50 backdrop-blur">
                 <div className="mx-auto w-full grid grid-cols-3 items-center px-12 py-4">
-                    <span className="text-xl font-bold text-zinc-950">Tracky</span>
+                    <img
+                        src={trackyIcon}
+                        alt="tracky icon"
+                        className="h-10 object-contain"
+                    />
 
                     <nav className="hidden justify-center gap-6 text-sm font-medium text-gray-600 md:flex">
                         <a href="#home" className="hover:text-slate-900">Home</a>
@@ -22,11 +27,11 @@ const LandingPageHeader = ({ onLogin, onRegister }: ModalProps ) => {
                     </nav>
 
                     <div className="flex justify-end gap-3">
-                        <LoginHeaderButton 
+                        <LoginHeaderButton
                             onClick={onLogin}
                         />
 
-                        <SignUpHeaderButton 
+                        <SignUpHeaderButton
                             onClick={onRegister}
                         />
                     </div>
