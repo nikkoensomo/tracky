@@ -90,7 +90,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
                 />
                 {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
 
@@ -100,7 +100,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Password"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
                 />
                 {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
 

@@ -35,8 +35,8 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({...formData, [e.target.name]: e.target.value });
-        setFormErrors({...formErrors, [e.target.name]: ""});
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormErrors({ ...formErrors, [e.target.name]: "" });
     }
 
     const validate = () => {
@@ -80,13 +80,13 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
         if (Object.keys(newErrors).length > 0) {
             setFormErrors(newErrors);
-            return; 
+            return;
         }
 
         try {
             setIsLoading(true);
 
-            const { confirmPassword, ...dataToSend} = formData;
+            const { confirmPassword, ...dataToSend } = formData;
             const data = await signupService(dataToSend);
 
             localStorage.setItem('token', data.token);
@@ -96,7 +96,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         } catch (error) {
             setFormErrors({
                 ...formErrors,
-                general: error instanceof Error ? error.message : 'Something went wrong' 
+                general: error instanceof Error ? error.message : 'Something went wrong'
             });
         } finally {
             setIsLoading(false);
@@ -107,67 +107,79 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         <>
             <div className="flex flex-col gap-4 px-6">
                 {formErrors.general && <p className="text-red-500 text-xs">{formErrors.general}</p>}
-                <input
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    placeholder="Username"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-                />
-                {formErrors.username && <p className="text-red-500 text-xs">{formErrors.username}</p>}
+                <div className="flex flex-col">
+                    <input
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="Username"
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
+                    />
+                    {formErrors.username && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.username}</p>}
+                </div>
 
-                <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    placeholder="First Name"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-                />
-                {formErrors.username && <p className="text-red-500 text-xs">{formErrors.username}</p>}
+                <div className="flex flex-col">
+                    <input
+                        type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        placeholder="First Name"
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
+                    />
+                    {formErrors.username && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.username}</p>}
+                </div>
 
-                <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    placeholder="Last Name"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-                />
-                {formErrors.username && <p className="text-red-500 text-xs">{formErrors.username}</p>}
+                <div className="flex flex-col">
+                    <input
+                        type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        placeholder="Last Name"
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
+                    />
+                    {formErrors.username && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.username}</p>}
+                </div>
 
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-                />
-                {formErrors.email && <p className="text-red-500 text-xs">{formErrors.email}</p>}
+                <div className="flex flex-col">
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
+                    />
+                    {formErrors.email && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.email}</p>}
+                </div>
 
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="Password"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-                />
-                {formErrors.password && <p className="text-red-500 text-xs">{formErrors.password}</p>}
+                <div className="flex flex-col">
+                    <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="Password"
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
+                    />
+                    {formErrors.password && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.password}</p>}
+                </div>
 
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="Confirm Password"
-                    className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
-                />
-                {formErrors.confirmPassword && <p className="text-red-500 text-xs">{formErrors.confirmPassword}</p>}
+                <div className="flex flex-col">
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        placeholder="Confirm Password"
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
+                    />
+                    {formErrors.confirmPassword && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.confirmPassword}</p>}
+                </div>
 
-                <SubmitFormButton 
+                <SubmitFormButton
                     onClick={handleSubmit}
                     label={isLoading ? (
                         <>

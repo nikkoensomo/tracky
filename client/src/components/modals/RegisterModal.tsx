@@ -1,12 +1,15 @@
 import { useRef, useEffect } from 'react';
 import RegisterForm from '../forms/RegisterForm';
 
+import trackyIcon from '../../assets/illustrations/tracky-icon.png'
+
 type ModalProps = {
     isOpen: boolean;
     onClose: () => void;
+    onRedirect: () => void;
 }
 
-const LoginModal = ({ isOpen, onClose }: ModalProps) => {
+const LoginModal = ({ isOpen, onClose, onRedirect }: ModalProps) => {
     const modalRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -35,15 +38,17 @@ const LoginModal = ({ isOpen, onClose }: ModalProps) => {
                     className="w-full max-w-md rounded-lg shadow-lg bg-white p-6"
                 >
                     <div className="flex flex-col items-center text-center">
-                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-teal-700 text-lg font-bold text-white">
-                            TR
-                        </div>
+                        <img
+                            src={trackyIcon}
+                            alt="Tracky Icon"
+                            className="h-10 object-contain mb-2"
+                        />
 
                         <h2 className="text-2xl font-semibold text-zinc-950">
                             Create your Tracky account!
                         </h2>
 
-                        <p className="mt-2 max-w-sm text-sm leading-6 text-gray-500 mb-4">
+                        <p className="mt-2 max-w-xs text-sm leading-6 text-gray-500 mb-4">
                             Start tracking smarter. Build better habits.
                             <br />
                             Take control today.
@@ -54,6 +59,19 @@ const LoginModal = ({ isOpen, onClose }: ModalProps) => {
                         <RegisterForm
                             onSuccess={onClose}
                         />
+                    </div>
+
+                    <div className="flex justify-center items-center text-center max-w-sm mt-4">
+                        <p className="text-sm text-gray-500">
+                            Already have an account?{" "}
+                            <button
+                                type='button'
+                                onClick={onRedirect}
+                                className="text-teal-800 hover:text-teal-900 hover:underline font-medium cursor-pointer"
+                            >
+                                Login
+                            </button>
+                        </p>
                     </div>
                 </div>
             </div>
