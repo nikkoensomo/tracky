@@ -1,4 +1,8 @@
+import useDocumentTitle from "../hooks/useDocumentTitle";
+
 const AccountsPage = () => {
+    useDocumentTitle('Accounts - Tracky');
+
     return (
         <>
             <main className="flex flex-col gap-4">

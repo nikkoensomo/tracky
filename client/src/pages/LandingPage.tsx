@@ -7,7 +7,11 @@ import LandingPageHero from '../components/sections/heroes/LandingPageHero';
 import AboutUsSection from '../components/sections/AboutUsSection';
 import ContactUsSection from '../components/sections/ContactUsSection';
 
+import useDocumentTitle from '../hooks/useDocumentTitle';
+
 const LandingPage = () => {
+    useDocumentTitle('Landing - Tracky');
+
     type ModalMode = 'login' | 'register' | null;
 
     const [modalMode, setModalMode] = useState<ModalMode>(null);

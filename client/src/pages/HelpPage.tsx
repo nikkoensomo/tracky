@@ -1,4 +1,8 @@
+import useDocumentTitle from "../hooks/useDocumentTitle";
+
 const HelpPage = () => {
+    useDocumentTitle('Help - Tracky');
+
     return (
         <>
             <main className="flex flex-col gap-4">

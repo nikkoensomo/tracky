@@ -14,9 +14,12 @@ import CreateCategoryModal from '../components/modals/category/CreateCategoryMod
 import CreateTransactionModal from '../components/modals/transaction/CreateTransactionModal';
 import CreateAccountFirstModal from '../components/modals/account/CreateAccountFirstModal';
 
+import useDocumentTitle from '../hooks/useDocumentTitle';
+
 type ModalMode = 'account' | 'transaction' | 'category' | 'account-required' | null;
 
 const DashboardPage = () => {
+    useDocumentTitle('Dashboard - Tracky');
 
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [accounts, setAccounts] = useState<Account[]>([]);
