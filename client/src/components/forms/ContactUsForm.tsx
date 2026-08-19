@@ -80,7 +80,7 @@ const ContactUsForm = () => {
                             value={formData.firstName}
                             onChange={handleChange}
                             placeholder="First Name"
-                            className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-950"
+                            className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-teal-700"
                         />
                     </div>
 
@@ -91,7 +91,7 @@ const ContactUsForm = () => {
                             value={formData.lastName}
                             onChange={handleChange}
                             placeholder="Last Name"
-                            className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-950"
+                            className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-teal-700"
                         />
                     </div>
                 </div>
@@ -103,7 +103,7 @@ const ContactUsForm = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="Email"
-                        className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-950"
+                        className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-teal-700"
                     />
                 </div>
 
@@ -114,7 +114,7 @@ const ContactUsForm = () => {
                         value={formData.phoneNumber}
                         onChange={handleChange}
                         placeholder="Phone Number"
-                        className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-950"
+                        className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-teal-700"
                     />
                 </div>
 
@@ -125,7 +125,7 @@ const ContactUsForm = () => {
                         onChange={handleChange}
                         placeholder="How can we help?"
                         rows={3}
-                        className="mt-1 w-full resize-none rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-950"
+                        className="mt-1 w-full resize-none rounded-md border border-gray-300 px-4 py-2 text-sm text-zinc-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-teal-700"
                     />
                 </div>
 

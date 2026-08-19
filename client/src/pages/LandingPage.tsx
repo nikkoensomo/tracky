@@ -28,6 +28,18 @@ const LandingPage = () => {
         setModalMode(null);
     }
 
+    const handleRedirect = () => {
+        handleCloseModal();
+
+        if (modalMode === 'login') {
+            setModalMode('register');
+        }
+
+        if (modalMode === 'register') {
+            setModalMode('login');
+        }
+    }
+
     return (
         <>
             <LandingPageHeader 
@@ -44,11 +56,13 @@ const LandingPage = () => {
             <LoginModal 
                 isOpen={modalMode === 'login'}
                 onClose={handleCloseModal}
+                onRedirect={handleRedirect}
             />
 
             <RegisterModal 
                 isOpen={modalMode === 'register'}
                 onClose={handleCloseModal}
+                onRedirect={handleRedirect}
             />
         </>
     )
