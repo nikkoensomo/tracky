@@ -1,6 +1,7 @@
 import './App.css'
 
 import { Routes, Route } from 'react-router-dom'
+import { Toaster } from 'sonner';
 import LandingPage from './pages/LandingPage'
 
 import DashboardLayout from './layouts/DashboardLayout'
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+      <Toaster />
       <Routes>
         <Route path="/" element={<LandingPage /> } />
 

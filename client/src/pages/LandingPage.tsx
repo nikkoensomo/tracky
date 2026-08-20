@@ -12,7 +12,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle';
 const LandingPage = () => {
     useDocumentTitle('Landing - Tracky');
 
-    type ModalMode = 'login' | 'register' | null;
+    type ModalMode = 'login' | 'register' | 'success' | null;
 
     const [modalMode, setModalMode] = useState<ModalMode>(null);
 
@@ -40,6 +40,11 @@ const LandingPage = () => {
         }
     }
 
+    const handleSentContactForm = () => {
+        handleCloseModal();
+        setModalMode('success');
+    }
+
     return (
         <>
             <LandingPageHeader 
@@ -52,7 +57,9 @@ const LandingPage = () => {
                     onGetStarted={handleLoginModal}
                 />
                 <AboutUsSection />
-                <ContactUsSection />
+                <ContactUsSection 
+                    onSuccess={handleSentContactForm}
+                />
             </main>
 
             <LoginModal 

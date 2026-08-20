@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes.js';
 import accountRoutes from './routes/accountRoutes.js';
 import transactionRoutes from './routes/transactionRoutes.js';
 import catergoryRoutes from './routes/categoryRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -33,6 +34,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/accounts", accountRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/categories", catergoryRoutes);
+
+//contact route
+app.use("/api/contact", contactRoutes);
 
 // server
 const PORT = process.env.PORT || 8080;

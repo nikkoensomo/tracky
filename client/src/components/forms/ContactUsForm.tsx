@@ -1,9 +1,15 @@
 import { useState } from 'react';
+import { toast } from 'sonner';
 import type { ContactFormData, ContactFormErrors } from "../../types/contact.types";
+import { sendContactMessageService } from '../../services/contactService';
 import { LoaderCircle } from 'lucide-react';
 import CreateButton from '../buttons/reusable/SubmitButton';
 
-const ContactUsForm = () => {
+type ContactUsFormProps = {
+    onSuccess: () => void;
+}
+
+const ContactUsForm = ({ onSuccess }: ContactUsFormProps ) => {
     const [formData, setFormData] = useState<ContactFormData>({
         firstName: '',
         lastName: '',
@@ -59,11 +65,19 @@ const ContactUsForm = () => {
 
         try {
             setIsLoading(true);
+
+            const payload = await sendContactMessageService(formData);
+
+            console.log(payload);
+            toast.success('Message sent successfuly!');
+            onSuccess();
         } catch (error) {
             setErrors({
                 ...errors,
                 general: error instanceof Error ? error.message : 'Unknown error.'
             });
+
+            toast.error('Failed to send message.');
         } finally {
             setIsLoading(false);
         }
@@ -131,6 +145,7 @@ const ContactUsForm = () => {
 
                 <CreateButton 
                     onClick={handleSubmit}
+                    isDisabled={isLoading}
                     label={isLoading ? (
                         <>
                             <LoaderCircle className="animate-spin" size={20} />
