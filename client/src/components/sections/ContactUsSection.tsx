@@ -1,6 +1,10 @@
 import ContactUsForm from "../forms/ContactUsForm";
 
-const ContactUsSection = () => {
+type ContactUsSectionProps = {
+    onSuccess: () => void;
+}
+
+const ContactUsSection = ({ onSuccess }: ContactUsSectionProps ) => {
     return (
         <>
             <section id="contact" className="scroll-mt-24 px-6 py-24">
@@ -21,7 +25,9 @@ const ContactUsSection = () => {
                     <div className="flex flex-col gap-4 bg-white border border-slate-200 rounded-xl shadow-xl p-6">
                         <span className="text-2xl text-slate-800">Contact Us</span>
                         <p className="text-sm text-slate-600">You can reach us anytime</p>
-                        <ContactUsForm />
+                        <ContactUsForm 
+                            onSuccess={onSuccess}
+                        />
                     </div>
                 </div>
             </section>
