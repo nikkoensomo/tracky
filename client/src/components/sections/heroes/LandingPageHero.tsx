@@ -3,11 +3,12 @@ import CTAButtonOne from "../../buttons/CTAButtonOne";
 import CTAButtonTwo from "../../buttons/CTAButtonTwo";
 import MockupCard from '../../cards/landing/MockupCard';
 
-const LandingPageHero = () => {
-    const handleStart = () => {
-        console.log('Not patched');
-    }
+type LandingPageHeroProps = {
+    onGetStarted: () => void;
+}
 
+const LandingPageHero = ({ onGetStarted }: LandingPageHeroProps ) => {
+    
     const handleSee = () => {
         console.log('Not patched');
     }
@@ -26,7 +27,7 @@ const LandingPageHero = () => {
                 
                     <div className="flex justify-between gap-4">
                         <CTAButtonOne 
-                            onClick={handleStart}
+                            onClick={onGetStarted}
                         />
                         <CTAButtonTwo 
                             onClick={handleSee}

@@ -48,7 +48,9 @@ const LandingPage = () => {
             />
 
             <main>
-                <LandingPageHero />
+                <LandingPageHero 
+                    onGetStarted={handleLoginModal}
+                />
                 <AboutUsSection />
                 <ContactUsSection />
             </main>
