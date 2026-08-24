@@ -10,7 +10,7 @@ type LandingPageHeroProps = {
 const LandingPageHero = ({ onGetStarted }: LandingPageHeroProps ) => {
     
     const handleSee = () => {
-        console.log('Not patched');
+        console.log('to be patched');
     }
 
     return (
