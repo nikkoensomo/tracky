@@ -11,7 +11,6 @@ export type LoginFormData = {
     password: string;
 }
 
-
 // ERRORS
 export type RegisterFormError = {
     email?: string;
