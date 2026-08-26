@@ -15,7 +15,7 @@ import CreateAccountModal from '../components/modals/account/CreateAccountModal'
 import CreateCategoryModal from '../components/modals/category/CreateCategoryModal';
 import CreateTransactionModal from '../components/modals/transaction/CreateTransactionModal';
 import CreateAccountFirstModal from '../components/modals/account/CreateAccountFirstModal';
-import WelcomeModal from '../components/modals/user/welcomeModal';
+import WelcomeModal from '../components/modals/user/WelcomeModal';
 
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
