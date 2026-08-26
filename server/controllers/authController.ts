@@ -6,7 +6,11 @@ import type { Request, Response } from 'express';
 
 export const signup = async (req: Request, res: Response) => {
     try {
-        const { username, firstName,lastName, email, password } = req.body;
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Please enter all required fields.' });
+        }
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -17,9 +21,6 @@ export const signup = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const user = await User.create({
-            username,
-            firstName,
-            lastName,
             email,
             password: hashedPassword,
         });
@@ -35,13 +36,12 @@ export const signup = async (req: Request, res: Response) => {
             { id: user._id },
             process.env.JWT_SECRET as string,
             { expiresIn: "7d" }
-        );
+        ); 
 
         res.status(201).json({
             token,
             user: {
                 id: user._id,
-                username: user.username,
                 email: user.email,
             },
         });
@@ -56,6 +56,10 @@ export const signup = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Please enter all required fields' });
+        }
 
         const user = await User.findOne({ email }).select('+password');
         if (!user) {
@@ -78,7 +82,6 @@ export const login = async (req: Request, res: Response) => {
             token,
             user: {
                 id: user._id,
-                username: user.username,
                 email: user.email,
             }
         });

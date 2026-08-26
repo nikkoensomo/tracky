@@ -28,7 +28,7 @@ const DashboardPageHero = ({ onCreateAccount, onCreateCategory, onCreateTransact
                         <AddAccountButton 
                             onClick={onCreateAccount}
                         />
-
+    
                         <SetBudgetButton 
                             onClick={onCreateCategory}
                         />
