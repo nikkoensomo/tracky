@@ -14,18 +14,12 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState<RegisterFormData>({
-        username: '',
-        firstName: '',
-        lastName: '',
         email: '',
         password: '',
         confirmPassword: '',
     });
 
     const [formErrors, setFormErrors] = useState<RegisterFormError>({
-        username: '',
-        firstName: '',
-        lastName: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -41,18 +35,6 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
     const validate = () => {
         const newErrors: RegisterFormError = {};
-
-        if (!formData.username.trim()) {
-            newErrors.username = "Username is required."
-        }
-
-        if (!formData.firstName.trim()) {
-            newErrors.firstName = "First name is required."
-        }
-
-        if (!formData.lastName.trim()) {
-            newErrors.lastName = "Last name is required."
-        }
 
         if (!formData.email.trim()) {
             newErrors.email = "Email is required."
@@ -107,42 +89,6 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         <>
             <div className="flex flex-col gap-4 px-6">
                 {formErrors.general && <p className="text-red-500 text-xs">{formErrors.general}</p>}
-                <div className="flex flex-col">
-                    <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        placeholder="Username"
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
-                    />
-                    {formErrors.username && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.username}</p>}
-                </div>
-
-                <div className="flex flex-col">
-                    <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        placeholder="First Name"
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
-                    />
-                    {formErrors.username && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.username}</p>}
-                </div>
-
-                <div className="flex flex-col">
-                    <input
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        placeholder="Last Name"
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-teal-700"
-                    />
-                    {formErrors.username && <p className="ml-1 mt-1 text-red-500 text-xs">{formErrors.username}</p>}
-                </div>
-
                 <div className="flex flex-col">
                     <input
                         type="email"
